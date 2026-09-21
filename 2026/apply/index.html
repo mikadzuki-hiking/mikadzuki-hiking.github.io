@@ -50,6 +50,8 @@
   .chk{ display:grid; grid-template-columns:1fr 1fr; gap:6px 10px; }
   .chk label{ display:flex; align-items:center; gap:8px; font-size:14px; padding:8px 10px; background:var(--sky-light); border-radius:10px; }
   .chk input{ width:18px; height:18px; accent-color:var(--navy); }
+  .chk.kind{ grid-template-columns:1fr; }
+  .chk label:has(input:checked){ background:var(--yellow); font-weight:900; }
   .agree{ display:flex; gap:10px; align-items:flex-start; font-size:13.5px; }
   .agree input{ width:20px; height:20px; margin-top:3px; flex:0 0 auto; accent-color:var(--navy); }
   .agree ul{ margin:6px 0 0; padding-left:1.2em; color:var(--navy-soft); font-size:12.5px; }
@@ -77,6 +79,15 @@
   <p class="lead">三日月山ファミリーハイキング 2026（12月上旬・日曜日）の参加申込です。定員に達し次第しめ切ります。</p>
 
   <form id="f" novalidate>
+    <div class="card">
+      <h2><span class="no en">0</span>申込の種類</h2>
+      <div class="chk kind">
+        <label><input type="radio" name="kind" value="新規" checked>新規のお申込み</label>
+        <label><input type="radio" name="kind" value="変更">申込内容の変更</label>
+        <label><input type="radio" name="kind" value="キャンセル">キャンセル</label>
+      </div>
+      <div class="hint" id="kindHint" style="margin-top:8px;display:none">変更・キャンセルの場合も、代表者のお名前と電話番号は最初の申込と同じものをご記入ください。変更は「参加される方」に<b>変更後の全員</b>を入れてください。</div>
+    </div>
     <div class="card">
       <h2><span class="no en">1</span>代表者の連絡先</h2>
       <label class="f"><span class="l">お名前<span class="req">必須</span></span><input type="text" name="name" autocomplete="name" placeholder="例）佐々木 太郎" required></label>
@@ -169,6 +180,11 @@ addRow(); addRow();
 
 // 代表者名を入れたら 1 行目に自動でコピー（未入力のときだけ）
 const f = document.getElementById("f");
+const kindOf = () => f.querySelector('input[name="kind"]:checked').value;
+f.querySelectorAll('input[name="kind"]').forEach((r) => r.addEventListener("change", () => {
+  document.getElementById("kindHint").style.display = kindOf() === "新規" ? "none" : "block";
+  document.getElementById("send").lastChild.textContent = kindOf() === "キャンセル" ? "キャンセルを送る" : kindOf() === "変更" ? "変更内容を送る" : "この内容で申し込む";
+}));
 f.name.addEventListener("change", () => { const first = rows.children[0]?.children[0]; if (first && !first.value) first.value = f.name.value; count(); });
 
 f.addEventListener("submit", async (ev) => {
@@ -179,28 +195,32 @@ f.addEventListener("submit", async (ev) => {
   const need = (el, label) => { if (!el.value.trim()) { problems.push(label); el.classList.add("bad"); } };
   need(f.name, "お名前"); need(f.kana, "ふりがな"); need(f.tel, "携帯電話番号");
   const members = [];
+  const cancel = kindOf() === "キャンセル";
   for (const r of rows.children) {
+    if (cancel) break;
     const [nm, ag, kind] = r.children;
     if (!nm.value.trim() && ag.value === "") continue;
     if (!nm.value.trim()) { problems.push("参加者のお名前"); nm.classList.add("bad"); }
     if (ag.value === "") { problems.push("参加者の年齢"); ag.classList.add("bad"); }
     members.push(`${nm.value.trim()}（${ag.value}歳・${kind.value}）`);
   }
-  if (members.length === 0) problems.push("参加される方（1 人以上）");
-  if (!document.getElementById("agree").checked) problems.push("注意事項の確認");
+  if (!cancel && members.length === 0) problems.push("参加される方（1 人以上）");
+  if (!cancel && !document.getElementById("agree").checked) problems.push("注意事項の確認");
   if (problems.length) { err.textContent = "未入力があります：" + [...new Set(problems)].join("、"); err.classList.add("on"); err.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
 
   const { a, k } = count();
   const how = [...f.querySelectorAll('input[name="how"]:checked')].map((x) => x.value).join("、") || "未回答";
   const fd = new FormData();
   fd.append(E.name, f.name.value.trim()); fd.append(E.kana, f.kana.value.trim()); fd.append(E.tel, f.tel.value.trim()); fd.append(E.email, f.email.value.trim());
-  fd.append(E.members, members.join("\n")); fd.append(E.adults, String(a)); fd.append(E.kids, String(k)); fd.append(E.how, how); fd.append(E.note, f.note.value.trim());
+  const tag = kindOf() === "新規" ? "" : `【${kindOf()}】`;
+  fd.append(E.members, cancel ? "【キャンセル】" : members.join("\n")); fd.append(E.adults, String(cancel ? 0 : a)); fd.append(E.kids, String(cancel ? 0 : k)); fd.append(E.how, how); fd.append(E.note, (tag + " " + f.note.value.trim()).trim());
   fd.append("fvv", "1"); fd.append("pageHistory", "0");
 
   const btn = document.getElementById("send"); btn.disabled = true; btn.textContent = "送信中…";
   try {
     await fetch(FORM, { method: "POST", mode: "no-cors", body: fd });
-    document.getElementById("sum").textContent = `代表者：${f.name.value.trim()}（${f.tel.value.trim()}）\n参加者：\n${members.join("\n")}\n大人 ${a} 人・こども ${k} 人`;
+    document.getElementById("sum").textContent = cancel ? `【キャンセル】代表者：${f.name.value.trim()}（${f.tel.value.trim()}）` : `${tag}代表者：${f.name.value.trim()}（${f.tel.value.trim()}）\n参加者：\n${members.join("\n")}\n大人 ${a} 人・こども ${k} 人`;
+    if (cancel) { document.querySelector("#done h2").textContent = "キャンセルを受け付けました"; document.querySelector("#done h2 + p").textContent = "ご連絡ありがとうございます。またの機会にお待ちしています。"; }
     f.style.display = "none"; document.getElementById("done").classList.add("on"); window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (e) {
     err.textContent = "送信に失敗しました。電波の良い場所でもう一度お試しいただくか、Instagram の DM でお申込みください。"; err.classList.add("on");
