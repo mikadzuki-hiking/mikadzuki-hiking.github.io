@@ -6,6 +6,7 @@
 <title>申込フォーム｜三日月山ファミリーハイキング 2026</title>
 <meta name="description" content="三日月山ファミリーハイキング 2026 の参加申込フォーム。スマホで1分。">
 <meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-store">
 <meta name="theme-color" content="#cfe3fb">
 <link rel="icon" href="../../img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -213,7 +214,7 @@ f.addEventListener("submit", async (ev) => {
   const fd = new FormData();
   fd.append(E.name, f.name.value.trim()); fd.append(E.kana, f.kana.value.trim()); fd.append(E.tel, f.tel.value.trim()); fd.append(E.email, f.email.value.trim());
   const tag = kindOf() === "新規" ? "" : `【${kindOf()}】`;
-  fd.append(E.members, cancel ? "【キャンセル】" : members.join("\n")); fd.append(E.adults, String(cancel ? 0 : a)); fd.append(E.kids, String(cancel ? 0 : k)); fd.append(E.how, how); fd.append(E.note, (tag + " " + f.note.value.trim()).trim());
+  fd.append(E.members, cancel ? "【キャンセル】" : (tag ? tag + "\n" : "") + members.join("\n")); fd.append(E.adults, String(cancel ? 0 : a)); fd.append(E.kids, String(cancel ? 0 : k)); fd.append(E.how, how); fd.append(E.note, (tag + " " + f.note.value.trim()).trim());
   fd.append("fvv", "1"); fd.append("pageHistory", "0");
 
   const btn = document.getElementById("send"); btn.disabled = true; btn.textContent = "送信中…";
