@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 開催案内｜三日月山ファミリーハイキング</title>
+<meta name="description" content="大分県日田市・三日月山で開く親子向けハイキングイベント（第3回）。フォトスタンプラリー・巨大ブランコ・ジップライン・ワークショップ。2026年12月上旬（日曜）開催、大人500円・こども無料。">
+<meta property="og:title" content="三日月山ファミリーハイキング 2026">
+<meta property="og:description" content="家族で一緒に、ワクワクの冒険体験！ 2026年12月上旬（日曜）・大分県日田市 三日月山">
+<meta property="og:image" content="https://mikadzuki-hiking.github.io/img/hero.jpg">
+<meta property="og:url" content="https://mikadzuki-hiking.github.io/2026/">
+<link rel="canonical" href="https://mikadzuki-hiking.github.io/2026/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#cfe3fb">
+<link rel="icon" href="../img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  /* ---------- チラシ案C2 と同じ配色（空色の地・濃紺の文字・からし色のアクセント） ---------- */
+  :root{
+    --sky:#cfe3fb; --sky-deep:#a9cdf1; --sky-light:#eaf2fd;
+    --navy:#1e3a5f; --navy-soft:rgba(30,58,95,.72);
+    --yellow:#f4b93b; --white:#fff;
+    --r:22px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body{ margin:0; background:var(--sky); color:var(--navy); font-family:"Zen Maru Gothic","BIZ UDPGothic","Yu Gothic","Meiryo",sans-serif; line-height:1.7; font-weight:500; }
+  img{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  .en{ font-family:"Poppins","Zen Maru Gothic",sans-serif; }
+  .wrap{ width:min(100% - 32px, 960px); margin:0 auto; }
+  section{ padding:44px 0; }
+  h2{ margin:0 0 18px; font-size:22px; font-weight:900; letter-spacing:.08em; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  h2 .en{ font-size:12px; font-weight:700; letter-spacing:.22em; opacity:.7; white-space:nowrap; }
+  @media (min-width:720px){ h2::after{ content:""; flex:1; border-top:2px dashed var(--navy); opacity:.4; } }
+  .pill{ display:inline-block; background:var(--white); color:var(--navy); font-weight:700; font-size:12px; padding:4px 14px; border-radius:99px; letter-spacing:.06em; white-space:nowrap; }
+  .pill.y{ background:var(--yellow); }
+  .mk{ background:var(--yellow); border-radius:6px; padding:0 6px; }
+  .small{ font-size:13px; color:var(--navy-soft); }
+
+  /* ---------- 固定ナビ（スマホは下、PC は上） ---------- */
+  nav.bar{ position:fixed; left:0; right:0; bottom:0; z-index:20; background:rgba(255,255,255,.94); backdrop-filter:blur(8px); border-top:1px solid rgba(30,58,95,.12); }
+  nav.bar ul{ list-style:none; margin:0 auto; padding:6px 8px calc(6px + env(safe-area-inset-bottom)); display:flex; justify-content:space-around; max-width:960px; }
+  nav.bar a{ text-decoration:none; font-size:11px; font-weight:700; display:flex; flex-direction:column; align-items:center; gap:2px; padding:2px 6px; }
+  nav.bar a svg{ width:22px; height:22px; }
+  nav.bar a.cta{ background:var(--yellow); border-radius:14px; padding:4px 12px; }
+  body{ padding-bottom:64px; }
+  @media (min-width:720px){
+    nav.bar{ bottom:auto; top:0; border-top:0; border-bottom:1px solid rgba(30,58,95,.12); }
+    nav.bar ul{ justify-content:flex-end; gap:6px; padding:8px 16px; }
+    nav.bar a{ flex-direction:row; gap:6px; font-size:13px; padding:6px 12px; }
+    nav.bar a svg{ width:18px; height:18px; }
+    body{ padding-bottom:0; padding-top:48px; }
+  }
+
+  /* ---------- トップ ---------- */
+  .hero{ padding:22px 0 10px; }
+  .hero .org{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+  .hero .title .jp{ font-size:clamp(26px,7vw,40px); font-weight:900; letter-spacing:.1em; line-height:1.2; display:flex; align-items:center; gap:10px; }
+  .hero .title .jp svg{ width:.95em; height:.95em; flex:0 0 auto; }
+  .hero .title .big{ font-size:clamp(48px,14vw,96px); font-weight:900; line-height:.9; letter-spacing:-.01em; margin-top:8px; }
+  .hero .title .year{ display:inline-block; margin-top:12px; background:var(--yellow); font-weight:900; font-size:clamp(18px,5vw,26px); padding:2px 20px; border-radius:99px; letter-spacing:.14em; }
+  .hero .title .sub{ margin-top:14px; font-size:clamp(16px,4.4vw,20px); font-weight:700; letter-spacing:.06em; }
+  .hero-grid{ display:grid; gap:18px; }
+  .cloud{ position:relative; }
+  .cloud-main{ clip-path:url(#blobA); aspect-ratio:1/1; width:min(100%,520px); margin:6px auto 0; }
+  .cloud-main img{ width:100%; height:100%; object-fit:cover; object-position:55% 45%; }
+  .badge{ position:absolute; right:4%; top:0; width:92px; height:92px; border-radius:50%; background:var(--yellow); display:flex; flex-direction:column; align-items:center; justify-content:center; transform:rotate(-8deg); box-shadow:0 2px 6px rgba(30,58,95,.18); text-align:center; line-height:1.15; }
+  .badge b{ font-size:22px; font-weight:900; display:block; margin:2px 0; }
+  .badge span{ font-size:10.5px; font-weight:700; }
+  @media (min-width:720px){
+    .hero{ padding:40px 0 20px; }
+    .hero-grid{ grid-template-columns:1fr 1.1fr; align-items:center; }
+    .cloud-main{ margin:0; }
+    .badge{ width:110px; height:110px; }
+  }
+
+  /* 開催情報 */
+  .info{ display:grid; gap:10px; margin-top:24px; }
+  .info .row{ display:flex; gap:12px; align-items:flex-start; }
+  .info .k{ flex:0 0 84px; background:var(--white); text-align:center; font-weight:900; font-size:14px; padding:5px 0; border-radius:99px; letter-spacing:.08em; margin-top:4px; }
+  .info .v{ font-weight:900; font-size:19px; line-height:1.3; }
+  .info .v small{ display:block; font-size:12.5px; font-weight:700; color:var(--navy-soft); margin-top:3px; line-height:1.5; }
+  @media (min-width:720px){ .info{ grid-template-columns:1fr 1fr; gap:14px 28px; } }
+
+  /* 申込ボタン */
+  .cta-row{ display:grid; gap:10px; margin-top:26px; }
+  .btn{ display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; font-weight:900; font-size:17px; padding:15px 18px; border-radius:99px; background:var(--white); box-shadow:0 2px 0 rgba(30,58,95,.12); }
+  .btn svg{ width:24px; height:24px; flex:0 0 auto; }
+  .btn.y{ background:var(--yellow); }
+  .btn.dim{ opacity:.55; }
+  .btn small{ font-size:12px; font-weight:700; color:var(--navy-soft); }
+  @media (min-width:720px){ .cta-row{ grid-template-columns:repeat(3,1fr); } }
+
+  /* ---------- おたのしみ ---------- */
+  .fun{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .fun li{ aspect-ratio:1; border-radius:50%; background:var(--white); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:8px; }
+  .fun .no{ font-size:11px; font-weight:700; letter-spacing:.1em; opacity:.6; line-height:1; }
+  .fun .nm{ font-size:clamp(12px,3.4vw,16px); font-weight:900; line-height:1.25; margin-top:4px; }
+  @media (min-width:720px){ .fun{ grid-template-columns:repeat(6,1fr); } }
+
+  /* ---------- 当日の流れ ---------- */
+  .tl{ list-style:none; margin:0; padding:0; border-left:3px dashed rgba(30,58,95,.35); margin-left:10px; }
+  .tl li{ position:relative; padding:0 0 18px 22px; }
+  .tl li::before{ content:""; position:absolute; left:-9.5px; top:8px; width:16px; height:16px; border-radius:50%; background:var(--yellow); border:3px solid var(--sky); }
+  .tl .t{ font-weight:900; font-size:15px; letter-spacing:.04em; }
+  .tl .d{ font-weight:900; font-size:16px; }
+  .tl .s{ font-size:13.5px; color:var(--navy-soft); }
+
+  /* ---------- プログラム（雲形写真＋説明） ---------- */
+  .prog{ display:grid; gap:18px; }
+  .card{ background:var(--white); border-radius:var(--r); padding:16px; display:grid; grid-template-columns:110px 1fr; gap:14px; align-items:center; }
+  .card .ph{ width:110px; height:110px; overflow:hidden; }
+  .card .ph img{ width:100%; height:100%; object-fit:cover; }
+  .card h3{ margin:0 0 4px; font-size:16.5px; font-weight:900; }
+  .card p{ margin:0; font-size:13.5px; color:var(--navy-soft); line-height:1.6; }
+  .bl1{ border-radius:58% 42% 55% 45% / 55% 48% 52% 45%; }
+  .bl2{ border-radius:50% 50% 46% 54% / 60% 58% 42% 40%; }
+  .bl3{ border-radius:45% 55% 52% 48% / 62% 55% 45% 38%; }
+  .bl4{ border-radius:52% 48% 40% 60% / 48% 62% 38% 52%; }
+  @media (min-width:720px){ .prog{ grid-template-columns:1fr 1fr; } }
+
+  /* ---------- ギャラリー ---------- */
+  .gal{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .gal figure{ margin:0; position:relative; overflow:hidden; aspect-ratio:1; }
+  .gal img{ width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+  .gal figure:hover img{ transform:scale(1.04); }
+  .gal figcaption{ position:absolute; left:50%; bottom:10px; transform:translateX(-50%); background:var(--white); font-size:11.5px; font-weight:700; padding:3px 12px; border-radius:99px; white-space:nowrap; }
+  .gal .wide{ grid-column:span 2; aspect-ratio:2/1.15; }
+  @media (min-width:720px){ .gal{ grid-template-columns:repeat(4,1fr); } .gal .wide{ grid-column:span 2; aspect-ratio:2/1; } }
+
+  /* ---------- 持ち物 ---------- */
+  .items{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .items li{ background:var(--white); border-radius:14px; padding:10px 12px; font-weight:700; font-size:14px; display:flex; align-items:center; gap:8px; }
+  .items li::before{ content:"✓"; color:var(--yellow); font-weight:900; font-size:18px; }
+  @media (min-width:720px){ .items{ grid-template-columns:repeat(3,1fr); } }
+
+  /* ---------- 集合場所 ---------- */
+  .place{ background:var(--white); border-radius:var(--r); padding:20px; display:grid; gap:14px; }
+  .place .name{ font-size:20px; font-weight:900; }
+  .place .map{ background:var(--sky-light); border-radius:16px; padding:14px; }
+  .place .map svg{ width:100%; height:auto; display:block; }
+  @media (min-width:720px){ .place{ grid-template-columns:1fr 1fr; align-items:center; } }
+
+  /* ---------- 申込 ---------- */
+  .apply{ background:var(--white); border-radius:var(--r); padding:22px 20px; }
+  .apply .tel{ font-size:clamp(28px,8vw,40px); font-weight:900; line-height:1.1; text-decoration:none; display:block; }
+  .apply .who{ font-size:13px; font-weight:700; color:var(--navy-soft); }
+  .apply .ways{ display:grid; gap:14px; margin-top:16px; }
+  .apply .way{ display:flex; gap:12px; align-items:flex-start; }
+  .apply .way .ic{ flex:0 0 44px; height:44px; border-radius:50%; background:var(--sky); display:flex; align-items:center; justify-content:center; }
+  .apply .way .ic svg{ width:24px; height:24px; }
+  .apply .way b{ display:block; font-size:15px; }
+  @media (min-width:720px){ .apply .ways{ grid-template-columns:repeat(3,1fr); } }
+
+  /* ---------- 注意・フッター ---------- */
+  .notes{ margin:0; padding-left:1.3em; font-size:14px; }
+  .notes li{ margin-bottom:6px; }
+  footer{ background:var(--navy); color:#fff; padding:28px 0 32px; font-size:13px; }
+  footer .logo{ width:64px; height:64px; border-radius:50%; background:#fff; padding:6px; }
+  footer .f{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  footer a{ color:#fff; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="blobA" clipPathUnits="objectBoundingBox">
+      <path d="M0.50,0.02 C0.70,0.00 0.90,0.08 0.96,0.28 C1.01,0.48 0.99,0.74 0.86,0.90 C0.72,1.03 0.42,1.01 0.22,0.93 C0.05,0.85 -0.02,0.62 0.03,0.42 C0.08,0.20 0.28,0.04 0.50,0.02 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<nav class="bar" aria-label="ページ内メニュー">
+  <ul>
+    <li><a href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-7H9v7H4a1 1 0 01-1-1z"/></svg>ホーム</a></li>
+    <li><a href="#fun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>おたのしみ</a></li>
+    <li><a href="#flow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>当日の流れ</a></li>
+    <li><a href="#place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>集合場所</a></li>
+    <li><a href="#apply" class="cta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H7l-3 3z"/></svg>申込む</a></li>
+  </ul>
+</nav>
+
+<!-- ================= トップ ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="org"><span class="pill y">2026 開催案内</span><span class="pill">主催　大肥の郷まちづくり会議</span></div>
+    <div class="hero-grid">
+      <div class="title">
+        <div class="jp">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M30 6a13 13 0 100 26 11 11 0 010-26z" fill="#f4b93b"/><path d="M2 44l13-20 7 10 5-7 11 17z" fill="#1e3a5f"/></svg>
+          三日月山
+        </div>
+        <div class="big en">FAMILY<br>HIKING</div>
+        <div class="year en">2026</div>
+        <div class="sub">家族で一緒に、<br>ワクワクの冒険体験！</div>
+      </div>
+      <div class="cloud">
+        <div class="cloud-main"><img src="../img/hero.jpg" alt="ススキを掲げて笑う女の子と三日月山の山並み" fetchpriority="high"></div>
+        <div class="badge" aria-label="おかげさまで第3回"><span>おかげさまで</span><b>第3回</b><span>毎年たくさんの<br>親子が参加</span></div>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="row"><div class="k">日程</div><div class="v">2026年12月上旬<small>日曜日・雨天中止。日にちは決まり次第 Instagram・LINE でお知らせします</small></div></div>
+      <div class="row"><div class="k">時間</div><div class="v">9:30 集合 ／ 15:00 解散予定<small>受付は 9:00 から</small></div></div>
+      <div class="row"><div class="k">集合場所</div><div class="v">夜明関町公民館グラウンド<small>大分県日田市夜明関町（国道386号 夜明ダムのそば）</small></div></div>
+      <div class="row"><div class="k">参加費</div><div class="v">大人 <span class="mk">500円</span> ・ こども <span class="mk">無料</span><small>保険料込み。小学生以下は保護者と一緒にご参加ください</small></div></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn y" href="tel:090-6294-3696"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>電話で申し込む</a>
+      <a class="btn" href="https://www.instagram.com/mikadzukiyama.hiking/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram DM で申し込む</a>
+      <a class="btn dim" href="#apply"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg>申込フォーム <small>準備中</small></a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= おたのしみ ================= -->
+<section id="fun">
+  <div class="wrap">
+    <h2>当日のおたのしみ <span class="en">FUN</span></h2>
+    <ul class="fun">
+      <li><span class="no en">01</span><span class="nm">フォト<br>スタンプ<br>ラリー</span></li>
+      <li><span class="no en">02</span><span class="nm">巨大<br>ブランコ</span></li>
+      <li><span class="no en">03</span><span class="nm">ジップ<br>ライン</span></li>
+      <li><span class="no en">04</span><span class="nm">ワーク<br>ショップ</span></li>
+      <li><span class="no en">05</span><span class="nm">ふるまい<br>コーヒー</span></li>
+      <li><span class="no en">06</span><span class="nm">展望台の<br>絶景</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= プログラム ================= -->
+<section id="program" style="padding-top:0">
+  <div class="wrap">
+    <h2>プログラム <span class="en">PROGRAM</span></h2>
+    <div class="prog">
+      <div class="card"><div class="ph bl1"><img src="../img/stamp.jpg" alt="スタンプカードを持つ子ども" loading="lazy"></div><div><h3>フォトスタンプラリー</h3><p>コースの途中にある「お題」を探して写真をパチリ。全部集めると景品をプレゼント！</p></div></div>
+      <div class="card"><div class="ph bl2"><img src="../img/zipline.jpg" alt="ジップラインで滑空する子ども" loading="lazy"></div><div><h3>巨大ブランコ ＆ ジップライン</h3><p>スタッフ手作りの大型遊具。こどもも おとなも自然の中で大冒険！</p></div></div>
+      <div class="card"><div class="ph bl3"><img src="../img/kite.jpg" alt="青空に上がる凧" loading="lazy"></div><div><h3>ワークショップ</h3><p>凧揚げ・皿回しなど、昔ながらの遊びを手作りで体験（前回は大人気でした）</p></div></div>
+      <div class="card"><div class="ph bl4"><img src="../img/drink.jpg" alt="あたたかい飲み物" loading="lazy"></div><div><h3>ふるまいコーヒー ＆ あったかメニュー</h3><p>山の上でいれるコーヒーと温かい一品でほっとひと息</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 当日の流れ ================= -->
+<section id="flow" style="padding-top:0">
+  <div class="wrap">
+    <h2>当日の流れ <span class="en">SCHEDULE</span></h2>
+    <ul class="tl">
+      <li><div class="t en">9:00〜</div><div class="d">受付開始（夜明関町公民館グラウンド）</div><div class="s">参加費のお支払いと名簿のご確認をお願いします</div></li>
+      <li><div class="t en">9:30</div><div class="d">集合・はじまりの会</div><div class="s">当日のスケジュールと注意点をご説明します</div></li>
+      <li><div class="t en">9:45</div><div class="d">車に分乗して三日月山の中腹（駐車場）へ移動</div><div class="s">集合場所から車で約5分</div></li>
+      <li><div class="t en">10:00</div><div class="d">ハイキングスタート！</div><div class="s">フォトスタンプラリーをしながら 駐車場 → くつろぎ広場：約2.5km・約40分（ゆっくりペース）</div></li>
+      <li><div class="t en">11:00〜</div><div class="d">くつろぎ広場で昼食・アクティビティ</div><div class="s">ふるまいコーヒー、巨大ブランコ、ジップライン、ワークショップ</div></li>
+      <li><div class="t en">13:00〜</div><div class="d">展望台へ（広場から約15分）絶景をながめよう</div></li>
+      <li><div class="t en">14:00</div><div class="d">くつろぎ広場に集合・点呼をして下山</div></li>
+      <li><div class="t en">15:00頃</div><div class="d">解散予定</div></li>
+    </ul>
+    <p class="small">＊時間は目安です。参加人数や天候により前後することがあります。</p>
+  </div>
+</section>
+
+<!-- ================= ギャラリー ================= -->
+<section id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <h2>昨年の様子 <span class="en">PHOTOS</span></h2>
+    <div class="gal">
+      <figure class="wide bl2"><img src="../img/group.jpg" alt="昨年の参加者の集合写真" loading="lazy"><figcaption>昨年の参加者のみなさん</figcaption></figure>
+      <figure class="bl1"><img src="../img/kataguruma.jpg" alt="肩車でピース" loading="lazy"><figcaption>肩車で絶景</figcaption></figure>
+      <figure class="bl3"><img src="../img/deck.jpg" alt="展望デッキで手を振る" loading="lazy"><figcaption>展望台</figcaption></figure>
+      <figure class="bl4"><img src="../img/swing.jpg" alt="巨大ブランコ" loading="lazy"><figcaption>巨大ブランコ</figcaption></figure>
+      <figure class="bl2"><img src="../img/run.jpg" alt="山道を走る女の子" loading="lazy"><figcaption>山道をハイキング</figcaption></figure>
+      <figure class="bl1"><img src="../img/walk.jpg" alt="手をつないで森を歩く" loading="lazy"><figcaption>森の道</figcaption></figure>
+      <figure class="bl3"><img src="../img/kite2.jpg" alt="凧揚げ" loading="lazy"><figcaption>凧揚げ</figcaption></figure>
+      <figure class="bl4"><img src="../img/plate.jpg" alt="皿回し" loading="lazy"><figcaption>皿回し</figcaption></figure>
+      <figure class="bl2"><img src="../img/view.jpg" alt="朝の絶景" loading="lazy"><figcaption>展望台からの眺め</figcaption></figure>
+      <figure class="bl1"><img src="../img/ginkgo.jpg" alt="いちょう並木" loading="lazy"><figcaption>いちょう並木</figcaption></figure>
+      <figure class="bl3"><img src="../img/nabe.jpg" alt="あったかメニュー" loading="lazy"><figcaption>あったかメニュー</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 持ち物 ================= -->
+<section id="items" style="padding-top:0">
+  <div class="wrap">
+    <h2>持ち物・服装 <span class="en">ITEMS</span></h2>
+    <ul class="items">
+      <li>お弁当・飲み物</li><li>歩きやすい靴</li><li>動きやすい服装・防寒着</li>
+      <li>タオル・レジャーシート</li><li>帽子・手袋（防寒）</li><li>おやつ・スマホ</li>
+    </ul>
+    <p class="small">＊重たい荷物はスタッフが車で広場まで運びます。　＊ゴミは各自お持ち帰りください。</p>
+  </div>
+</section>
+
+<!-- ================= 集合場所 ================= -->
+<section id="place" style="padding-top:0">
+  <div class="wrap">
+    <h2>集合場所 <span class="en">ACCESS</span></h2>
+    <div class="place">
+      <div>
+        <div class="name">夜明関町公民館グラウンド</div>
+        <div class="small">〒877-1111 大分県日田市夜明関町</div>
+        <p style="margin:10px 0 0;font-size:14.5px">国道386号「関町」の信号を山側へ。夜明ダムのすぐ近くです。<br><span class="small">＊駐車場あり。受付後、スタッフの案内で中腹の駐車場へ移動します。</span></p>
+        <a class="btn y" style="margin-top:16px" href="https://maps.app.goo.gl/YT1moEjQtCZ6J5A26" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Google マップで開く</a>
+      </div>
+      <div class="map" aria-hidden="true">
+        <!-- 略地図（チラシ裏面と同じ内容） -->
+        <svg viewBox="0 0 320 210" font-family="Zen Maru Gothic, sans-serif" font-weight="700">
+          <path d="M0 150 Q80 120 160 140 T320 130" fill="none" stroke="#a9cdf1" stroke-width="18"/>
+          <text x="14" y="176" font-size="11" fill="#5b7a99">筑後川</text>
+          <path d="M0 95 L320 85" stroke="#8a8a8a" stroke-width="4" stroke-dasharray="10 5"/>
+          <text x="238" y="78" font-size="10" fill="#8a8a8a">JR久大本線</text>
+          <path d="M0 118 L320 108" stroke="#fff" stroke-width="9"/><path d="M0 118 L320 108" stroke="#1e3a5f" stroke-width="1.5"/>
+          <text x="8" y="132" font-size="10" fill="#1e3a5f">← 杷木方面</text><text x="256" y="128" font-size="10" fill="#1e3a5f">日田方面 →</text>
+          <text x="130" y="108" font-size="10" fill="#1e3a5f">国道386号</text>
+          <rect x="170" y="100" width="20" height="12" rx="3" fill="#f4b93b"/><text x="147" y="97" font-size="9" fill="#1e3a5f">「関町」の信号</text>
+          <path d="M180 100 L180 48" stroke="#1e3a5f" stroke-width="2" stroke-dasharray="4 3"/>
+          <path d="M120 60 L160 12 L200 60 Z" fill="#a9cdf1"/><text x="140" y="70" font-size="10" fill="#1e3a5f">三日月山</text>
+          <path d="M200 146 Q215 136 230 146" fill="none" stroke="#1e3a5f" stroke-width="3"/><text x="238" y="150" font-size="9" fill="#1e3a5f">夜明ダム</text>
+          <rect x="160" y="26" width="46" height="22" rx="6" fill="#fff" stroke="#1e3a5f" stroke-width="1.5"/>
+          <text x="164" y="36" font-size="8" fill="#1e3a5f">夜明関町公民館</text><text x="170" y="45" font-size="8" fill="#1e3a5f">グラウンド</text>
+          <text x="210" y="24" font-size="14" fill="#f4b93b">★</text><text x="222" y="24" font-size="9" fill="#1e3a5f">集合場所</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 申込・問合せ ================= -->
+<section id="apply" style="padding-top:0">
+  <div class="wrap">
+    <h2>お申込み・お問合せ <span class="en">ENTRY</span></h2>
+    <div class="apply">
+      <div class="small">お電話で</div>
+      <a class="tel en" href="tel:090-6294-3696">090-6294-3696</a>
+      <div class="who">大肥の郷まちづくり会議　代表：佐々木</div>
+      <p style="margin:10px 0 0;font-size:14.5px">参加される方の<b>お名前・人数（大人／こども）</b>をお知らせください。</p>
+      <div class="ways">
+        <div class="way"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></div><div><b>お電話</b><span class="small">スマホならこのページの番号をタップで発信できます</span></div></div>
+        <div class="way"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#1e3a5f" stroke="none"/></svg></div><div><b>Instagram DM</b><span class="small"><a href="https://www.instagram.com/mikadzukiyama.hiking/" target="_blank" rel="noopener">@mikadzukiyama.hiking</a>　最新情報もこちらで発信</span></div></div>
+        <div class="way"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg></div><div><b>申込フォーム（準備中）</b><span class="small">スマホで1分。公開までしばらくお待ちください</span></div></div>
+      </div>
+      <p class="small" style="margin:16px 0 0">＊定員に達し次第しめ切ります。お早めにどうぞ。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ご注意 ================= -->
+<section id="notes" style="padding-top:0">
+  <div class="wrap">
+    <h2>ご注意 <span class="en">NOTICE</span></h2>
+    <ul class="notes">
+      <li>雨天・荒天の場合は中止します。前日の夕方までに Instagram・お電話でお知らせします。</li>
+      <li>参加費には保険料が含まれています。当日受付でお支払いください。</li>
+      <li>山道を歩きます。小さいお子さまは保護者の方と手をつないで歩いてください。</li>
+      <li>ジップライン・ブランコはスタッフの案内に従ってご利用ください。</li>
+      <li>当日撮影した写真は、イベントの報告や広報（まちづくり通信・SNS）に使わせていただくことがあります。ご都合の悪い方は受付でお申し出ください。</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap f">
+    <img class="logo" src="../img/logo.png" alt="MT.MIKADZUKI ロゴ">
+    <div>
+      <div style="font-weight:900;font-size:15px">主催：大肥の郷まちづくり会議</div>
+      <div>会場整備も遊具づくりも、地域のみんなの手づくり。ご協賛・お手伝いも大歓迎！</div>
+      <div style="margin-top:6px;opacity:.85">Instagram <a href="https://www.instagram.com/mikadzukiyama.hiking/" target="_blank" rel="noopener">@mikadzukiyama.hiking</a>　／　TEL <a href="tel:090-6294-3696">090-6294-3696</a></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
