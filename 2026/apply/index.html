@@ -47,6 +47,8 @@
   .count{ margin-top:12px; display:flex; flex-wrap:wrap; gap:4px 10px; font-size:14px; font-weight:700; align-items:center; }
   .count .hint{ flex-basis:100%; margin:0; }
   .count b{ background:var(--yellow); border-radius:8px; padding:0 8px; }
+  #birdCard .chk{ grid-template-columns:1fr; }
+  #birdCard .chk:empty{ display:none; }
 
   .chk{ display:grid; grid-template-columns:1fr 1fr; gap:6px 10px; }
   .chk label{ display:flex; align-items:center; gap:8px; font-size:14px; padding:8px 10px; background:var(--sky-light); border-radius:10px; }
@@ -77,7 +79,7 @@
 <div class="wrap">
   <a class="back" href="../"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>2026 開催案内にもどる</a>
   <h1>申込フォーム <span class="en" style="font-size:.6em;opacity:.7">ENTRY 2026</span></h1>
-  <p class="lead">三日月山ファミリーハイキング 2026（12月5日（土））の参加申込です。定員に達し次第しめ切ります。</p>
+  <p class="lead">三日月山ファミリーハイキング 2026（12月5日（土））の参加申込です。<b>しめ切りは 11月30日（月）</b>。定員に達した時点で終了します。</p>
 
   <form id="f" novalidate>
     <div class="card">
@@ -106,8 +108,15 @@
       <div class="count"><span>大人 <b id="cA">0</b> 人</span><span>こども <b id="cK">0</b> 人</span><span class="hint">参加費：大人 500円・こども無料（当日受付でお支払い）</span></div>
     </div>
 
+    <div class="card" id="birdCard">
+      <h2><span class="no en">3</span>鳥さんの家づくり</h2>
+      <div class="hint" style="margin:-6px 0 10px">日田の「山とデザイン室」のキットで、こどもが巣箱（バードハウス）を組み立てます。<b>こどものみ・先着20名</b>（申込順）です。参加するお子さまにチェックを入れてください。20名に達した場合は、こちらからご連絡します。</div>
+      <div class="chk" id="bird"></div>
+      <div class="hint" id="birdNone">上の「参加される方」に<b>こども</b>を入れると、ここにお名前が出ます。</div>
+    </div>
+
     <div class="card">
-      <h2><span class="no en">3</span>このイベントを何で知りましたか</h2>
+      <h2><span class="no en">4</span>このイベントを何で知りましたか</h2>
       <div class="chk">
         <label><input type="checkbox" name="how" value="Instagram">Instagram</label>
         <label><input type="checkbox" name="how" value="チラシ">チラシ</label>
@@ -118,7 +127,7 @@
     </div>
 
     <div class="card">
-      <h2><span class="no en">4</span>連絡事項（任意）</h2>
+      <h2><span class="no en">5</span>連絡事項（任意）</h2>
       <textarea name="note" placeholder="アレルギー、ご質問、集合場所への行き方の相談など"></textarea>
     </div>
 
@@ -164,6 +173,7 @@ function addRow(name = "", age = "") {
   const [nm, ag, kind, del] = r.children;
   ag.addEventListener("input", () => { if (ag.value !== "") kind.value = Number(ag.value) <= KID_MAX ? "こども" : "大人"; count(); });
   kind.addEventListener("change", count);
+  nm.addEventListener("input", birdList);
   del.addEventListener("click", () => { r.remove(); count(); });
   rows.appendChild(r); count(); return r;
 }
@@ -172,7 +182,20 @@ function count() {
   for (const r of rows.children) { const [nm, ag, kind] = r.children; if (!nm.value.trim() && ag.value === "") continue; (kind.value === "こども" ? k++ : a++); }
   document.getElementById("cA").textContent = a; document.getElementById("cK").textContent = k;
   for (const r of rows.children) r.children[3].disabled = rows.children.length <= 1;
+  birdList();
   return { a, k };
+}
+// 鳥さんの家づくり：こどもの行だけをチェック欄に並べる（チェックの状態は行ごとに覚えておく）
+function birdList() {
+  const box = document.getElementById("bird"); box.innerHTML = "";
+  for (const r of rows.children) {
+    const [nm, ag, kind] = r.children;
+    if (kind.value !== "こども" || (!nm.value.trim() && ag.value === "")) continue;
+    const lb = document.createElement("label"), cb = document.createElement("input");
+    cb.type = "checkbox"; cb.checked = !!r.bird; cb.addEventListener("change", () => { r.bird = cb.checked; });
+    lb.append(cb, nm.value.trim() || "（お名前未入力）"); box.appendChild(lb);
+  }
+  document.getElementById("birdNone").style.display = box.children.length ? "none" : "block";
 }
 document.getElementById("add").addEventListener("click", () => addRow().children[0].focus());
 document.addEventListener("input", (e) => { e.target.classList?.remove("bad"); document.getElementById("err").classList.remove("on"); });
@@ -184,6 +207,7 @@ const f = document.getElementById("f");
 const kindOf = () => f.querySelector('input[name="kind"]:checked').value;
 f.querySelectorAll('input[name="kind"]').forEach((r) => r.addEventListener("change", () => {
   document.getElementById("kindHint").style.display = kindOf() === "新規" ? "none" : "block";
+  document.getElementById("birdCard").style.display = kindOf() === "キャンセル" ? "none" : "";
   document.getElementById("send").lastChild.textContent = kindOf() === "キャンセル" ? "キャンセルを送る" : kindOf() === "変更" ? "変更内容を送る" : "この内容で申し込む";
 }));
 f.name.addEventListener("change", () => { const first = rows.children[0]?.children[0]; if (first && !first.value) first.value = f.name.value; count(); });
@@ -195,7 +219,7 @@ f.addEventListener("submit", async (ev) => {
   const problems = [];
   const need = (el, label) => { if (!el.value.trim()) { problems.push(label); el.classList.add("bad"); } };
   need(f.name, "お名前"); need(f.kana, "ふりがな"); need(f.tel, "携帯電話番号");
-  const members = [];
+  const members = [], birds = [];
   const cancel = kindOf() === "キャンセル";
   for (const r of rows.children) {
     if (cancel) break;
@@ -203,7 +227,9 @@ f.addEventListener("submit", async (ev) => {
     if (!nm.value.trim() && ag.value === "") continue;
     if (!nm.value.trim()) { problems.push("参加者のお名前"); nm.classList.add("bad"); }
     if (ag.value === "") { problems.push("参加者の年齢"); ag.classList.add("bad"); }
-    members.push(`${nm.value.trim()}（${ag.value}歳・${kind.value}）`);
+    const bird = kind.value === "こども" && r.bird;
+    if (bird) birds.push(nm.value.trim());
+    members.push(`${nm.value.trim()}（${ag.value}歳・${kind.value}${bird ? "・鳥さんの家" : ""}）`);
   }
   if (!cancel && members.length === 0) problems.push("参加される方（1 人以上）");
   if (!cancel && !document.getElementById("agree").checked) problems.push("注意事項の確認");
@@ -214,13 +240,14 @@ f.addEventListener("submit", async (ev) => {
   const fd = new FormData();
   fd.append(E.name, f.name.value.trim()); fd.append(E.kana, f.kana.value.trim()); fd.append(E.tel, f.tel.value.trim()); fd.append(E.email, f.email.value.trim());
   const tag = kindOf() === "新規" ? "" : `【${kindOf()}】`;
-  fd.append(E.members, cancel ? "【キャンセル】" : (tag ? tag + "\n" : "") + members.join("\n")); fd.append(E.adults, String(cancel ? 0 : a)); fd.append(E.kids, String(cancel ? 0 : k)); fd.append(E.how, how); fd.append(E.note, (tag + " " + f.note.value.trim()).trim());
+  const birdTag = k ? `【鳥さんの家 ${birds.length ? birds.length + "名：" + birds.join("、") : "なし"}】` : "";
+  fd.append(E.members, cancel ? "【キャンセル】" : (tag ? tag + "\n" : "") + members.join("\n")); fd.append(E.adults, String(cancel ? 0 : a)); fd.append(E.kids, String(cancel ? 0 : k)); fd.append(E.how, how); fd.append(E.note, (tag + " " + (cancel ? "" : birdTag) + " " + f.note.value.trim()).trim());
   fd.append("fvv", "1"); fd.append("pageHistory", "0");
 
   const btn = document.getElementById("send"); btn.disabled = true; btn.textContent = "送信中…";
   try {
     await fetch(FORM, { method: "POST", mode: "no-cors", body: fd });
-    document.getElementById("sum").textContent = cancel ? `【キャンセル】代表者：${f.name.value.trim()}（${f.tel.value.trim()}）` : `${tag}代表者：${f.name.value.trim()}（${f.tel.value.trim()}）\n参加者：\n${members.join("\n")}\n大人 ${a} 人・こども ${k} 人`;
+    document.getElementById("sum").textContent = cancel ? `【キャンセル】代表者：${f.name.value.trim()}（${f.tel.value.trim()}）` : `${tag}代表者：${f.name.value.trim()}（${f.tel.value.trim()}）\n参加者：\n${members.join("\n")}\n大人 ${a} 人・こども ${k} 人${k ? "\n鳥さんの家づくり：" + (birds.length ? birds.join("、") : "なし") : ""}`;
     if (cancel) { document.querySelector("#done h2").textContent = "キャンセルを受け付けました"; document.querySelector("#done h2 + p").textContent = "ご連絡ありがとうございます。またの機会にお待ちしています。"; }
     f.style.display = "none"; document.getElementById("done").classList.add("on"); window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (e) {

@@ -54,8 +54,15 @@
 |---|---|---|---|
 | <img src="img/stamp.jpg" width="90"> | `stamp.jpg` | フォトスタンプラリー | ● |
 | <img src="img/zipline.jpg" width="90"> | `zipline.jpg` | 巨大ブランコ ＆ ジップライン | ● |
-| <img src="img/kite.jpg" width="90"> | `kite.jpg` | ワークショップ | ● |
+| <img src="img/birdhouse.jpg" width="90"> | `birdhouse.jpg` | 鳥さんの家づくり（下の「鳥さんの家づくり」欄にも出る） | ● |
 | <img src="img/nabe.jpg" width="90"> | `nabe.jpg` | ふるまいコーヒー ＆ あったかドリンク | ● |
+
+### 2026 ページ「鳥さんの家づくり」（写真は山とデザイン室様から提供）
+
+| 写真 | ファイル名 | 場所 | 枠 |
+|---|---|---|---|
+| <img src="img/birdhouse-ki.jpg" width="90"> | `birdhouse-ki.jpg` | 右上の横長 | ▭ |
+| <img src="img/birdhouse-mori.jpg" width="90"> | `birdhouse-mori.jpg` | 右下の縦長 | ▯ |
 
 ### 2026 ページ「昨年の様子」（先頭の `view.jpg` ＋ 下の 22 枚。1 日の流れ順）
 

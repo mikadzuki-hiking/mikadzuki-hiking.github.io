@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2026 開催案内｜三日月山ファミリーハイキング</title>
-<meta name="description" content="大分県日田市・三日月山で開く親子向けハイキングイベント（第3回）。フォトスタンプラリー・巨大ブランコ・ジップライン・ワークショップ。2026年12月5日（土）開催、大人500円・こども無料。雨天のときは12月12日（土）に延期。">
+<meta name="description" content="大分県日田市・三日月山で開く親子向けハイキングイベント（第3回）。フォトスタンプラリー・巨大ブランコ・ジップライン・鳥さんの家（バードハウス）づくり。2026年12月5日（土）開催、大人500円・こども無料。雨天のときは12月12日（土）に延期。">
 <meta property="og:title" content="三日月山ファミリーハイキング 2026">
 <meta property="og:description" content="家族で一緒に、ワクワクの冒険体験！ 2026年12月5日（土）・大分県日田市 三日月山">
 <meta property="og:image" content="https://mikadzuki-hiking.github.io/img/hero.jpg">
@@ -121,6 +121,22 @@
   .bl3{ border-radius:45% 55% 52% 48% / 62% 55% 45% 38%; }
   .bl4{ border-radius:52% 48% 40% 60% / 48% 62% 38% 52%; }
   @media (min-width:720px){ .prog{ grid-template-columns:1fr 1fr; } }
+  .new{ display:inline-block; background:var(--yellow); font-size:10.5px; font-weight:700; letter-spacing:.12em; padding:1px 8px; border-radius:99px; vertical-align:2px; }
+  .card p a{ font-weight:700; color:var(--navy); white-space:nowrap; }
+
+  /* ---------- 鳥さんの家づくり ---------- */
+  .bird{ background:var(--white); border-radius:var(--r); padding:20px 18px; display:grid; gap:18px; }
+  .bird h3{ margin:0 0 6px; font-size:18px; font-weight:900; line-height:1.5; }
+  .bird .lead{ margin:0 0 12px; font-size:14.5px; line-height:1.8; }
+  .bird blockquote{ margin:0; padding:12px 14px; background:var(--sky); border-radius:14px; font-size:13.5px; line-height:1.85; color:var(--navy-soft); }
+  .bird blockquote p{ margin:0 0 6px; }
+  .bird blockquote cite{ display:block; font-style:normal; font-weight:700; color:var(--navy); text-align:right; margin-top:4px; }
+  .bird .link{ margin:12px 0 0; font-size:13.5px; }
+  .bird .link a{ font-weight:700; }
+  .bird .pics{ display:grid; grid-template-columns:1fr 1fr; gap:10px; align-content:start; }
+  .bird .pics img{ width:100%; height:100%; object-fit:cover; border-radius:14px; aspect-ratio:3/4; }
+  .bird .pics .w{ grid-column:span 2; aspect-ratio:4/3; }
+  @media (min-width:720px){ .bird{ grid-template-columns:1.15fr 1fr; padding:26px; gap:24px; } }
 
   /* ---------- ギャラリー ---------- */
   .gal{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
@@ -207,6 +223,7 @@
       <div class="row"><div class="k">日程</div><div class="v">2026年12月5日（土）<small>雨天のときは翌週 12月12日（土）に延期します</small></div></div>
       <div class="row"><div class="k">時間</div><div class="v">9:30 集合 ／ 15:00 解散予定<small>受付は 9:00 から</small></div></div>
       <div class="row"><div class="k">集合場所</div><div class="v">夜明関町公民館グラウンド<small>大分県日田市夜明関町（国道386号 夜明ダムのそば）</small></div></div>
+      <div class="row"><div class="k">申込</div><div class="v"><span class="mk">11月30日（月）</span>まで<small>定員に達した時点で終了します。鳥さんの家づくりは、こども先着20名</small></div></div>
       <div class="row"><div class="k">参加費</div><div class="v">大人 <span class="mk">500円</span> ・ こども <span class="mk">無料</span><small>保険料込み。小学生以下は保護者と一緒にご参加ください</small></div></div>
     </div>
 
@@ -225,7 +242,7 @@
       <li><span class="no en">01</span><span class="nm">フォト<br>スタンプ<br>ラリー</span></li>
       <li><span class="no en">02</span><span class="nm">巨大<br>ブランコ</span></li>
       <li><span class="no en">03</span><span class="nm">ジップ<br>ライン</span></li>
-      <li><span class="no en">04</span><span class="nm">ワーク<br>ショップ</span></li>
+      <li><span class="no en">04</span><span class="nm">鳥さんの<br>家づくり</span></li>
       <li><span class="no en">05</span><span class="nm">ふるまい<br>コーヒー</span></li>
       <li><span class="no en">06</span><span class="nm">展望台の<br>絶景</span></li>
     </ul>
@@ -239,8 +256,33 @@
     <div class="prog">
       <div class="card"><div class="ph bl1"><img src="../img/stamp.jpg" alt="スタンプカードを持つ子ども" loading="lazy"></div><div><h3>フォトスタンプラリー</h3><p>コースの途中にある「お題」を探して写真をパチリ。全部集めると景品をプレゼント！</p></div></div>
       <div class="card"><div class="ph bl2"><img src="../img/zipline.jpg" alt="ジップラインで滑空する子ども" loading="lazy"></div><div><h3>巨大ブランコ ＆ ジップライン</h3><p>スタッフ手作りの大型遊具。こどもも おとなも自然の中で大冒険！</p></div></div>
-      <div class="card"><div class="ph bl3"><img src="../img/kite.jpg" alt="青空に上がる凧" loading="lazy"></div><div><h3>ワークショップ</h3><p>凧揚げ・皿回しなど、昔ながらの遊びを手作りで体験（前回は大人気でした）</p></div></div>
+      <div class="card"><div class="ph bl3"><img src="../img/birdhouse.jpg" alt="巣箱の入口にとまる小鳥" loading="lazy"></div><div><h3>鳥さんの家づくり <span class="new en">NEW</span></h3><p>日田の「山とデザイン室」のキットで、こどもが巣箱（バードハウス）を組み立てます。<b>こども先着20名</b>。<a href="#bird">くわしくはこちら</a></p></div></div>
       <div class="card"><div class="ph bl4"><img src="../img/nabe.jpg" alt="山の上であたたかい飲み物をいれるスタッフ" loading="lazy"></div><div><h3>ふるまいコーヒー ＆ あったかドリンク</h3><p>山の上でいれるコーヒーやココアで、ほっとひと息</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 鳥さんの家づくり ================= -->
+<section id="bird" style="padding-top:0">
+  <div class="wrap">
+    <h2>鳥さんの家づくり <span class="en">BIRD HOUSE</span></h2>
+    <div class="bird">
+      <div>
+        <h3>今年のワークショップは、こどもがつくる「鳥さんの家」</h3>
+        <p class="lead">日田市の「山とデザイン室」がつくる巣箱（バードハウス）のキットを使って、こどもたちが鳥さんの家を組み立てます。森に暮らす野鳥を迎える、小さな家です。<br><b class="mk" style="white-space:nowrap">こども先着20名</b>　参加するお子さまは、<a href="apply/">申込フォーム</a>でお知らせください。</p>
+        <blockquote>
+          <p>森をつくる仲間でもある“野鳥”。森に棲む野鳥は木の実を食べて、消化されなかった種子が糞として森にまかれ、その種子が発芽して植物が育つことで、森がつくられる一翼を担っています。</p>
+          <p>ある国では、家に訪れる小鳥をフェザードフレンド（翼のある友人）と呼んで親しみ、迎える家をバードハウスと呼んでいるそうです。</p>
+          <p>木の実を求めてやって来る翼のある友人を迎えるために鳥さんの家を作り、野鳥を通して山や森を想うきっかけになればと思います。</p>
+          <cite>― 山とデザイン室　上玉利 佳哉さん</cite>
+        </blockquote>
+        <p class="link">山とデザイン室（日田市）<br>サイト：<a href="https://yamatodesignsitu.com/" target="_blank" rel="noopener">yamatodesignsitu.com</a><br>Instagram：<a href="https://www.instagram.com/yama_to_design/" target="_blank" rel="noopener">@yama_to_design</a></p>
+      </div>
+      <div class="pics">
+        <img class="w" src="../img/birdhouse-ki.jpg" alt="木の幹に掛けた三角屋根の巣箱" loading="lazy">
+        <img src="../img/birdhouse.jpg" alt="巣箱の入口にとまる小鳥" loading="lazy">
+        <img src="../img/birdhouse-mori.jpg" alt="冬の森の木に掛けた巣箱" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
@@ -254,7 +296,7 @@
       <li><div class="t en">9:30</div><div class="d">集合・はじまりの会</div><div class="s">当日のスケジュールと注意点をご説明します</div></li>
       <li><div class="t en">9:45</div><div class="d">車に分乗して三日月山の中腹（駐車場）へ移動</div><div class="s">集合場所から車で約5分</div></li>
       <li><div class="t en">10:00</div><div class="d">ハイキングスタート！</div><div class="s">フォトスタンプラリーをしながら 駐車場 → くつろぎ広場：約2.5km・約40分（ゆっくりペース）</div></li>
-      <li><div class="t en">11:00〜</div><div class="d">くつろぎ広場で昼食・アクティビティ</div><div class="s">ふるまいコーヒー、巨大ブランコ、ジップライン、ワークショップ</div></li>
+      <li><div class="t en">11:00〜</div><div class="d">くつろぎ広場で昼食・アクティビティ</div><div class="s">ふるまいコーヒー、巨大ブランコ、ジップライン、鳥さんの家づくり</div></li>
       <li><div class="t en">13:00〜</div><div class="d">展望台へ（広場から約15分）絶景をながめよう</div></li>
       <li><div class="t en">14:00</div><div class="d">くつろぎ広場に集合・点呼をして下山</div></li>
       <li><div class="t en">15:00頃</div><div class="d">解散予定</div></li>
@@ -354,7 +396,7 @@
         <div class="way"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="#1e3a5f" stroke="none"/></svg></div><div><b>Instagram DM</b><span class="small"><a href="https://www.instagram.com/mikadzukiyama.hiking/" target="_blank" rel="noopener">@mikadzukiyama.hiking</a>　最新情報もこちらで発信</span></div></div>
         <div class="way"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg></div><div><b>申込フォーム</b><span class="small">代表者の連絡先と、参加される方全員のお名前・年齢を入力するだけ</span></div></div>
       </div>
-      <p class="small" style="margin:16px 0 0">＊定員に達し次第しめ切ります。お早めにどうぞ。</p>
+      <p class="small" style="margin:16px 0 0">＊しめ切りは <b>11月30日（月）</b>。定員に達した時点で終了します。お早めにどうぞ。</p>
     </div>
   </div>
 </section>
