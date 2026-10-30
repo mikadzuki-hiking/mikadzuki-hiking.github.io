@@ -64,7 +64,7 @@
 | <img src="img/annai.jpg" width="90"> | `annai.jpg` | 案内板で迷わない | ■ |
 | <img src="img/run.jpg" width="90"> | `run.jpg` | 山道をハイキング | ■ |
 | <img src="img/walk.jpg" width="90"> | `walk.jpg` | 森の道 | ■ |
-| <img src="img/shinrin.jpg" width="90"> | `shinrin.jpg` | 森林セラピー | ■ |
+| <img src="img/shinrin.jpg" width="90"> | `shinrin.jpg` | 森林浴 | ■ |
 | <img src="img/ginkgo.jpg" width="90"> | `ginkgo.jpg` | いちょう並木 | ■ |
 | <img src="img/drink.jpg" width="90"> | `drink.jpg` | 秋さがし | ■ |
 | <img src="img/hiroba.jpg" width="90"> | `hiroba.jpg` | くつろぎ広場 | ■ |
