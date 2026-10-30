@@ -127,7 +127,7 @@
   .gal figure{ margin:0; position:relative; overflow:hidden; aspect-ratio:1; }
   .gal img{ width:100%; height:100%; object-fit:cover; transition:transform .4s; }
   .gal figure:hover img{ transform:scale(1.04); }
-  .gal figcaption{ position:absolute; left:50%; bottom:10px; transform:translateX(-50%); background:var(--white); font-size:11.5px; font-weight:700; padding:3px 12px; border-radius:99px; white-space:nowrap; }
+  .gal figcaption{ position:absolute; left:50%; bottom:10px; transform:translateX(-50%); background:var(--white); font-size:11.5px; font-weight:700; padding:3px 12px; border-radius:99px; white-space:nowrap; max-width:84%; overflow:hidden; text-overflow:ellipsis; }
   .gal .wide{ grid-column:span 2; aspect-ratio:2/1.15; }
   @media (min-width:720px){ .gal{ grid-template-columns:repeat(4,1fr); } .gal .wide{ grid-column:span 2; aspect-ratio:2/1; } }
 
@@ -267,18 +267,32 @@
 <section id="gallery" style="padding-top:0">
   <div class="wrap">
     <h2>昨年の様子 <span class="en">PHOTOS</span></h2>
+    <p class="small" style="margin:-6px 0 16px">歩いて、食べて、遊んで、絶景へ。当日の 1 日を写真でふりかえります。</p>
+    <!-- 1 日の流れ順（歩く → くつろぎ広場 → 遊ぶ → 展望台 → 帰り）。23 枚＝24 マス（先頭の wide が 2 マス）。増減するときはマス数に注意 -->
     <div class="gal">
       <figure class="wide bl2"><img src="../img/view.jpg" alt="三日月山の展望台から見た朝の眺め" loading="lazy"><figcaption>展望台からの眺め</figcaption></figure>
-      <figure class="bl1"><img src="../img/kataguruma.jpg" alt="肩車でピース" loading="lazy"><figcaption>肩車で絶景</figcaption></figure>
-      <figure class="bl3"><img src="../img/deck.jpg" alt="展望デッキで手を振る" loading="lazy"><figcaption>展望台</figcaption></figure>
-      <figure class="bl4"><img src="../img/swing.jpg" alt="巨大ブランコ" loading="lazy"><figcaption>巨大ブランコ</figcaption></figure>
-      <figure class="bl2"><img src="../img/zipline2.jpg" alt="ジップラインに乗る子ども" loading="lazy"><figcaption>ジップライン</figcaption></figure>
-      <figure class="bl2"><img src="../img/run.jpg" alt="山道を走る女の子" loading="lazy"><figcaption>山道をハイキング</figcaption></figure>
-      <figure class="bl1"><img src="../img/walk.jpg" alt="手をつないで森を歩く" loading="lazy"><figcaption>森の道</figcaption></figure>
-      <figure class="bl3"><img src="../img/kite2.jpg" alt="凧揚げ" loading="lazy"><figcaption>凧揚げ</figcaption></figure>
-      <figure class="bl4"><img src="../img/plate.jpg" alt="皿回し" loading="lazy"><figcaption>皿回し</figcaption></figure>
+      <figure class="bl1"><img src="../img/annai.jpg" alt="登山道に立つ木の案内板" loading="lazy"><figcaption>案内板で迷わない</figcaption></figure>
+      <figure class="bl3"><img src="../img/run.jpg" alt="山道を歩く参加者" loading="lazy"><figcaption>山道をハイキング</figcaption></figure>
+      <figure class="bl4"><img src="../img/walk.jpg" alt="森の中を歩く親子" loading="lazy"><figcaption>森の道</figcaption></figure>
+      <figure class="bl2"><img src="../img/shinrin.jpg" alt="杉林の山道を歩く家族" loading="lazy"><figcaption>森林セラピー</figcaption></figure>
       <figure class="bl1"><img src="../img/ginkgo.jpg" alt="いちょう並木" loading="lazy"><figcaption>いちょう並木</figcaption></figure>
-      <figure class="bl3"><img src="../img/drink.jpg" alt="あたたかい飲み物をいれているところ" loading="lazy"><figcaption>ふるまいコーヒー</figcaption></figure>
+      <figure class="bl3"><img src="../img/drink.jpg" alt="秋さがしで見つけたもの" loading="lazy"><figcaption>秋さがし</figcaption></figure>
+      <figure class="bl4"><img src="../img/hiroba.jpg" alt="町を見下ろすくつろぎ広場のテーブルと丸太のいす" loading="lazy"><figcaption>くつろぎ広場</figcaption></figure>
+      <figure class="bl2"><img src="../img/saikou.jpg" alt="青空の下、広場でお昼を食べる参加者" loading="lazy"><figcaption>青空ランチ、最高！</figcaption></figure>
+      <figure class="bl1"><img src="../img/bento.jpg" alt="レジャーシートでお弁当を食べる親子" loading="lazy"><figcaption>仲良くお弁当</figcaption></figure>
+      <figure class="bl3"><img src="../img/cupmen.jpg" alt="カップ麺をのぞきこむ子どもたち" loading="lazy"><figcaption>仲良くカップ麺</figcaption></figure>
+      <figure class="bl4"><img src="../img/nabe-party.jpg" alt="テーブルで囲むお鍋" loading="lazy"><figcaption>お鍋をかこむ人も</figcaption></figure>
+      <figure class="bl2"><img src="../img/chill.jpg" alt="アウトドアいすでくつろぐ参加者" loading="lazy"><figcaption>のんびりチル</figcaption></figure>
+      <figure class="bl1"><img src="../img/egao.jpg" alt="テーブルでおやつを食べて笑う子ども" loading="lazy"><figcaption>笑顔が絶えない</figcaption></figure>
+      <figure class="bl3"><img src="../img/swing.jpg" alt="巨大ブランコ" loading="lazy"><figcaption>巨大ブランコ</figcaption></figure>
+      <figure class="bl4"><img src="../img/zipline2.jpg" alt="ジップラインに乗る子ども" loading="lazy"><figcaption>ジップライン</figcaption></figure>
+      <figure class="bl2"><img src="../img/daikoufun.jpg" alt="ジップラインの台の上ではしゃぐ子どもたち" loading="lazy"><figcaption>大興奮！</figcaption></figure>
+      <figure class="bl1"><img src="../img/kite2.jpg" alt="凧揚げ" loading="lazy"><figcaption>凧揚げ</figcaption></figure>
+      <figure class="bl3"><img src="../img/plate.jpg" alt="皿回し" loading="lazy"><figcaption>皿回し</figcaption></figure>
+      <figure class="bl4"><img src="../img/deck.jpg" alt="展望デッキで手を振る" loading="lazy"><figcaption>展望台</figcaption></figure>
+      <figure class="bl2"><img src="../img/kataguruma.jpg" alt="肩車でピース" loading="lazy"><figcaption>肩車で絶景</figcaption></figure>
+      <figure class="bl1"><img src="../img/omoide.jpg" alt="展望デッキから景色をながめる親子" loading="lazy"><figcaption>一生の思い出</figcaption></figure>
+      <figure class="bl3"><img src="../img/kaeri.jpg" alt="帰り道を元気に歩く子ども" loading="lazy"><figcaption>帰りも元気いっぱい</figcaption></figure>
     </div>
   </div>
 </section>

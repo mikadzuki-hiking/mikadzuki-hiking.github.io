@@ -21,7 +21,7 @@
 - スマホの写真をそのまま上げると、**撮影場所（位置情報）が残ることがあります**。縮小ツールを通すと消えます
 - iPhone の HEIC 形式（`.heic`）はブラウザで表示できません。JPEG にしてから使う
 - 枠は丸みのある形・正方形に切り抜いて表示します。**写したいもの（顔など）は写真の真ん中に**
-- 「昨年の様子」は 11 枚で 12 マスを埋めています。**枚数を増やす・減らすときは Claude に頼む**（ページの直しが必要）
+- 「昨年の様子」は 23 枚で 24 マスを埋めています（PC は 4 列、スマホは 2 列）。**枚数を増やす・減らすときは Claude に頼む**（ページの直しが必要）
 - 差し替えたら、次に Claude にサイトを直してもらうとき「GitHub で写真を差し替えた」と一言伝える
   （PC 側の控えを最新にしてから作業するため）
 
@@ -57,20 +57,32 @@
 | <img src="img/kite.jpg" width="90"> | `kite.jpg` | ワークショップ | ● |
 | <img src="img/nabe.jpg" width="90"> | `nabe.jpg` | ふるまいコーヒー ＆ あったかドリンク | ● |
 
-### 2026 ページ「昨年の様子」（先頭の `view.jpg` ＋ 下の 10 枚）
+### 2026 ページ「昨年の様子」（先頭の `view.jpg` ＋ 下の 22 枚。1 日の流れ順）
 
 | 写真 | ファイル名 | 説明文（写真の下） | 枠 |
 |---|---|---|---|
-| <img src="img/kataguruma.jpg" width="90"> | `kataguruma.jpg` | 肩車で絶景 | ■ |
-| <img src="img/deck.jpg" width="90"> | `deck.jpg` | 展望台 | ■ |
-| <img src="img/swing.jpg" width="90"> | `swing.jpg` | 巨大ブランコ | ■ |
-| <img src="img/zipline2.jpg" width="90"> | `zipline2.jpg` | ジップライン | ■ |
+| <img src="img/annai.jpg" width="90"> | `annai.jpg` | 案内板で迷わない | ■ |
 | <img src="img/run.jpg" width="90"> | `run.jpg` | 山道をハイキング | ■ |
 | <img src="img/walk.jpg" width="90"> | `walk.jpg` | 森の道 | ■ |
+| <img src="img/shinrin.jpg" width="90"> | `shinrin.jpg` | 森林セラピー | ■ |
+| <img src="img/ginkgo.jpg" width="90"> | `ginkgo.jpg` | いちょう並木 | ■ |
+| <img src="img/drink.jpg" width="90"> | `drink.jpg` | 秋さがし | ■ |
+| <img src="img/hiroba.jpg" width="90"> | `hiroba.jpg` | くつろぎ広場 | ■ |
+| <img src="img/saikou.jpg" width="90"> | `saikou.jpg` | 青空ランチ、最高！ | ■ |
+| <img src="img/bento.jpg" width="90"> | `bento.jpg` | 仲良くお弁当 | ■ |
+| <img src="img/cupmen.jpg" width="90"> | `cupmen.jpg` | 仲良くカップ麺 | ■ |
+| <img src="img/nabe-party.jpg" width="90"> | `nabe-party.jpg` | お鍋をかこむ人も | ■ |
+| <img src="img/chill.jpg" width="90"> | `chill.jpg` | のんびりチル | ■ |
+| <img src="img/egao.jpg" width="90"> | `egao.jpg` | 笑顔が絶えない | ■ |
+| <img src="img/swing.jpg" width="90"> | `swing.jpg` | 巨大ブランコ | ■ |
+| <img src="img/zipline2.jpg" width="90"> | `zipline2.jpg` | ジップライン | ■ |
+| <img src="img/daikoufun.jpg" width="90"> | `daikoufun.jpg` | 大興奮！ | ■ |
 | <img src="img/kite2.jpg" width="90"> | `kite2.jpg` | 凧揚げ | ■ |
 | <img src="img/plate.jpg" width="90"> | `plate.jpg` | 皿回し | ■ |
-| <img src="img/ginkgo.jpg" width="90"> | `ginkgo.jpg` | いちょう並木 | ■ |
-| <img src="img/drink.jpg" width="90"> | `drink.jpg` | ふるまいコーヒー | ■ |
+| <img src="img/deck.jpg" width="90"> | `deck.jpg` | 展望台 | ■ |
+| <img src="img/kataguruma.jpg" width="90"> | `kataguruma.jpg` | 肩車で絶景 | ■ |
+| <img src="img/omoide.jpg" width="90"> | `omoide.jpg` | 一生の思い出 | ■ |
+| <img src="img/kaeri.jpg" width="90"> | `kaeri.jpg` | 帰りも元気いっぱい | ■ |
 
 - 写真の下の**説明文**や、**写真の説明（画面の読み上げ用）**を変えたいときは Claude に頼む
   （写真だけ替えて内容が変わる場合は、説明文も合わせて直す）
