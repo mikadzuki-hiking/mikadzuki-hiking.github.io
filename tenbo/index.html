@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>展望台からの眺め｜三日月山ファミリーハイキング</title>
+<meta name="description" content="三日月山の展望台から見える山と町の名前。写真で見る・カメラをかざして見る。">
+<meta name="theme-color" content="#cfe3fb">
+<link rel="icon" href="../img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --sky:#cfe3fb; --sky-light:#eaf2fd; --navy:#1e3a5f; --navy-soft:rgba(30,58,95,.72); --yellow:#f4b93b; --white:#fff; --r:22px; }
+  *{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; background:var(--sky); color:var(--navy); font-family:"Zen Maru Gothic","BIZ UDPGothic","Yu Gothic","Meiryo",sans-serif; line-height:1.7; font-weight:500; }
+  .en{ font-family:"Poppins","Zen Maru Gothic",sans-serif; }
+  .wrap{ width:min(100% - 32px, 1100px); margin:0 auto; padding:20px 0 50px; }
+  a{ color:inherit; }
+  .back{ font-size:13px; font-weight:700; text-decoration:none; display:inline-flex; gap:6px; align-items:center; margin-bottom:10px; }
+  h1{ margin:0 0 2px; font-size:clamp(22px,6vw,30px); font-weight:900; letter-spacing:.06em; line-height:1.3; }
+  .lead{ font-size:13.5px; color:var(--navy-soft); margin:0 0 14px; }
+
+  /* 切り替え */
+  .tabs{ display:flex; gap:8px; margin-bottom:12px; }
+  .tabs button{ flex:1; font:inherit; font-weight:900; font-size:15px; padding:12px 8px; border:0; border-radius:99px; background:var(--white); color:var(--navy); cursor:pointer; }
+  .tabs button[aria-selected=true]{ background:var(--navy); color:#fff; }
+
+  /* 写真で見る */
+  .pano{ position:relative; overflow-x:auto; overflow-y:hidden; border-radius:var(--r); background:#9fc2ea; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+  .pano-in{ position:relative; height:min(72vh, 620px); aspect-ratio:4/3; min-width:100%; }
+  @media (min-width:900px){ .pano-in{ height:auto; width:100%; } }
+  .pano-in img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; user-select:none; -webkit-user-drag:none; }
+  .ruler{ position:absolute; left:0; right:0; top:8px; height:30px; pointer-events:none; }
+  .ruler span{ position:absolute; transform:translateX(-50%); font-size:12px; font-weight:900; background:rgba(255,255,255,.85); border-radius:99px; padding:0 10px; white-space:nowrap; }
+  .ruler span.main{ background:var(--yellow); }
+  .pin{ position:absolute; width:12px; height:12px; margin:-6px 0 0 -6px; border-radius:50%; background:var(--yellow); border:2px solid var(--navy); }
+  .stem{ position:absolute; width:2px; margin-left:-1px; background:rgba(255,255,255,.9); }
+  .tag{ position:absolute; transform:translateX(-50%); white-space:nowrap; font:inherit; text-align:left; background:rgba(255,255,255,.94); color:var(--navy);
+        border:2px solid var(--navy); border-radius:12px; padding:2px 10px 3px; line-height:1.25; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.18); }
+  .tag b{ display:block; font-size:14px; font-weight:900; }
+  .tag small{ display:block; font-size:10.5px; color:var(--navy-soft); font-weight:700; }
+  .tag.m{ border-color:#2f6a2c; } .tag.r{ border-color:#2c6fb0; }
+  .tag.on{ background:var(--yellow); }
+  .hint{ font-size:12px; color:var(--navy-soft); margin:8px 4px 0; }
+
+  /* 詳しく */
+  .info{ background:var(--white); border-radius:var(--r); padding:16px 18px; margin-top:12px; min-height:60px; }
+  .info h2{ margin:0; font-size:20px; font-weight:900; letter-spacing:.04em; }
+  .info .meta{ font-size:13px; font-weight:700; color:var(--navy-soft); }
+  .info p{ margin:6px 0 0; font-size:14px; }
+
+  /* 一覧 */
+  .list{ background:var(--white); border-radius:var(--r); padding:14px 18px; margin-top:12px; }
+  .list h2{ font-size:16px; margin:0 0 6px; font-weight:900; }
+  .list table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  .list td{ padding:6px 4px; border-top:1px solid var(--sky); vertical-align:top; }
+  .list td:first-child{ font-weight:900; white-space:nowrap; }
+  .list td.d{ text-align:right; white-space:nowrap; color:var(--navy-soft); font-weight:700; }
+  .note{ font-size:12px; color:var(--navy-soft); margin:12px 4px 0; }
+
+  /* カメラで見る */
+  #cam{ position:fixed; inset:0; z-index:50; background:#000; display:none; overflow:hidden; touch-action:none; }
+  #cam.show{ display:block; }
+  #cam video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #layer{ position:absolute; inset:0; }
+  #layer .tag{ transform:translateX(-50%); transition:none; z-index:2; }
+  #layer .pin{ z-index:1; }
+  #layer .stem{ transition:none; }
+  #layer .pin{ transition:none; }
+  .cam-top{ position:absolute; left:0; right:0; top:0; padding:calc(env(safe-area-inset-top) + 10px) 12px 10px; display:flex; gap:8px; align-items:center;
+            background:linear-gradient(rgba(0,0,0,.55),transparent); color:#fff; }
+  .cam-top .dir{ font-family:"Poppins"; font-weight:900; font-size:18px; flex:1; text-shadow:0 1px 3px #000; }
+  .cbtn{ font:inherit; font-weight:900; font-size:14px; border:0; border-radius:99px; padding:9px 16px; background:#fff; color:var(--navy); cursor:pointer; }
+  .cbtn.y{ background:var(--yellow); }
+  .cam-bottom{ position:absolute; left:0; right:0; bottom:0; padding:12px 12px calc(env(safe-area-inset-bottom) + 14px); background:linear-gradient(transparent,rgba(0,0,0,.6)); color:#fff;
+               font-size:13px; text-align:center; text-shadow:0 1px 2px #000; }
+  .cam-bottom .row{ display:flex; gap:8px; justify-content:center; margin-top:8px; }
+  .cam-msg{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(88%,420px); background:#fff; color:var(--navy); border-radius:var(--r); padding:20px; text-align:center; display:none; }
+  .cam-msg.show{ display:block; }
+  .cam-msg p{ margin:0 0 14px; font-size:14px; }
+  #adjust.on{ background:var(--yellow); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← 三日月山ファミリーハイキング</a>
+  <h1>展望台からの眺め</h1>
+  <p class="lead">三日月山の展望台から西を見ると、筑後川と筑後平野の向こうに、久留米・鳥栖の町や佐賀の山まで見わたせます。名前を押すと説明が出ます。</p>
+
+  <div class="tabs" role="tablist">
+    <button id="tabPhoto" role="tab" aria-selected="true">写真で見る</button>
+    <button id="tabCam" role="tab" aria-selected="false">📷 カメラで見る</button>
+  </div>
+
+  <div class="pano" id="pano">
+    <div class="pano-in" id="panoIn">
+      <img src="view-west.jpg" alt="三日月山の展望台から西を見た景色。左に鷹取山、中央に筑後平野と筑後川">
+      <div class="ruler" id="ruler"></div>
+    </div>
+  </div>
+  <p class="hint">スマホでは写真を左右になぞると、景色の続きが見られます。</p>
+
+  <div class="info" id="info" aria-live="polite">
+    <h2>名前を押してください</h2>
+    <p>山・町・川の名前と、展望台からの距離が出ます。</p>
+  </div>
+
+  <div class="list">
+    <h2>見えるもの一覧（左から順に）</h2>
+    <table id="tbl"></table>
+  </div>
+
+  <p class="note">
+    ・名前の位置は、国土地理院の標高データと OpenStreetMap の地図データから計算しました。距離は展望台からの直線距離です。<br>
+    ・遠くの山（天山・脊振山）は、空気が澄んだ日だけ見えます。<br>
+    ・「カメラで見る」はスマホの方位センサーを使います。位置情報は使いません。カメラの映像はスマホの中だけで使い、どこにも送りません。
+  </p>
+</div>
+
+<!-- カメラで見る（全画面） -->
+<div id="cam" aria-hidden="true">
+  <video id="video" playsinline muted autoplay></video>
+  <div id="layer"></div>
+  <div class="cam-top">
+    <span class="dir" id="dir">―</span>
+    <button class="cbtn" id="adjust">ずれを直す</button>
+    <button class="cbtn" id="closeCam">閉じる</button>
+  </div>
+  <div class="cam-bottom" id="camBottom">展望台から西（筑後平野の方）にスマホを向けてください</div>
+  <div class="cam-msg" id="camMsg"><p id="camMsgText"></p><button class="cbtn y" id="camMsgBtn">OK</button></div>
+</div>
+
+<script>
+/* 見えるもの（az＝方角［北0°・東90°］、el＝見上げる角度、px/py＝写真の上の位置％、ty＝札の高さ％） */
+const P = [
+  {n:"鷹取山", s:"802m・耳納連山", d:"13.6km", k:"m", az:249.4, el:1.37, px:14.65, py:62.6, ty:42.7, info:"耳納連山でいちばん高い山。山頂に電波塔が立っています。"},
+  {n:"道の駅うきは", s:"うきは市浮羽町", d:"4km", k:"p", az:251.16, el:-5.4, px:17.8, py:79.2, ty:86},
+  {n:"うきは市 浮羽町", s:"福岡県", d:"6.5km", k:"t", az:256.35, el:-3.64, px:27.75, py:75.17, ty:78.7},
+  {n:"高良山", s:"312m・久留米市", d:"27km", k:"m", az:258.6, el:-0.43, px:32.05, py:67.5, ty:50.7, info:"耳納連山の西のはしの山。高良大社があります。"},
+  {n:"久留米市", s:"福岡県", d:"33km", k:"t", az:264.88, el:-0.9, px:43.35, py:69.0, ty:42.7},
+  {n:"天山", s:"1,046m・佐賀県", d:"67km", k:"m", az:269.3, el:0.23, px:51.25, py:66.53, ty:34.7, info:"佐賀県の山。空気が澄んだ日に、遠くうっすら見えます。"},
+  {n:"うきは市 吉井町", s:"白壁の町並み", d:"9km", k:"t", az:269.37, el:-2.71, px:51.25, py:73.67, ty:86},
+  {n:"工場", s:"うきは市浮羽町三春", d:"3km", k:"p", az:273.01, el:-7.85, px:57.5, py:86.67, ty:93.3},
+  {n:"原鶴温泉", s:"朝倉市", d:"7.7km", k:"p", az:275.67, el:-3.17, px:62.5, py:75.17, ty:78.7, info:"筑後川沿いの温泉地。川沿いの高い建物は温泉旅館です。"},
+  {n:"鳥栖市", s:"佐賀県", d:"33km", k:"t", az:276.17, el:-0.87, px:63.5, py:69.6, ty:42.7},
+  {n:"小郡市", s:"福岡県", d:"29km", k:"t", az:281.24, el:-0.98, px:72.8, py:70.17, ty:50.7, shift:-24},
+  {n:"脊振山・九千部山", s:"1,055m・848m", d:"39〜47km", k:"m", az:281.97, el:0.53, px:74.25, py:66.57, ty:34.7, info:"福岡県と佐賀県の境に連なる脊振山地の山。"},
+  {n:"筑後川", s:"九州でいちばん大きな川", d:"3.6km", k:"r", az:284.74, el:-7.11, px:79.17, py:85.5, ty:93.3, info:"阿蘇の山から有明海へ流れる、九州でいちばん大きな川です。"},
+  {n:"杷木の山", s:"朝倉市", d:"7km", k:"m", az:286.35, el:-2.63, px:82.5, py:74.5, ty:62},
+  {n:"杷木", s:"朝倉市", d:"6.5km", k:"t", az:289.75, el:-3.48, px:89.28, py:76.8, ty:86},
+];
+const KIND = {m:"山", t:"町", p:"場所", r:"川"};
+const DIR16 = ["北","北北東","北東","東北東","東","東南東","南東","南南東","南","南南西","南西","西南西","西","西北西","北西","北北西"];
+const dirName = a => DIR16[Math.round(((a%360)+360)%360/22.5)%16];
+
+/* ---------- 写真で見る ---------- */
+const panoIn = document.getElementById("panoIn"), info = document.getElementById("info");
+let tags = [];
+function show(i){
+  const p = P[i];
+  tags.forEach((t,j)=>t.classList.toggle("on", j===i));
+  info.innerHTML = `<h2>${p.n}</h2><div class="meta">${p.s ? p.s+"　" : ""}展望台から ${p.d}・${dirName(p.az)}の方角</div>` + (p.info ? `<p>${p.info}</p>` : "");
+}
+P.forEach((p,i)=>{
+  const up = p.ty < p.py;
+  const stem = document.createElement("div"); stem.className="stem";
+  stem.style.left = p.px+"%";
+  stem.style.top = (up ? p.ty+3 : p.py)+"%"; stem.style.height = Math.abs(p.py-(up ? p.ty+3 : p.ty))+"%";
+  const pin = document.createElement("div"); pin.className="pin"; pin.style.left=p.px+"%"; pin.style.top=p.py+"%";
+  const t = document.createElement("button"); t.className="tag "+p.k; t.type="button";
+  t.innerHTML = `<b>${p.n}</b><small>${p.d}</small>`;
+  t.style.left = p.px+"%"; t.style.top = p.ty+"%";
+  if (p.shift) t.style.marginLeft = p.shift+"px";
+  t.onclick = ()=>show(i);
+  panoIn.append(stem, pin, t); tags.push(t);
+});
+// 方角の目盛り（写真の中心＝268.4°、横の写る範囲 52.3°）
+const AZ0 = 268.42, FX = 2000/4073.6;
+[[247.5,"西南西"],[270,"西"],[292.5,"西北西"]].forEach(([a,l])=>{
+  const x = 50 + 50*Math.tan((a-AZ0)*Math.PI/180)/FX;
+  const s = document.createElement("span"); s.textContent = l; s.style.left = x+"%"; if (l==="西") s.className="main";
+  document.getElementById("ruler").append(s);
+});
+// 一覧
+document.getElementById("tbl").innerHTML = P.map((p,i)=>`<tr><td>${p.n}</td><td>${KIND[p.k]}${p.s ? "・"+p.s : ""}</td><td class="d">${p.d}</td></tr>`).join("");
+// スマホでは鷹取山〜町の中心が見える位置から
+addEventListener("load", ()=>{ const pn=document.getElementById("pano"); pn.scrollLeft = (pn.scrollWidth-pn.clientWidth)*0.35; });
+
+/* ---------- カメラで見る ---------- */
+const cam = document.getElementById("cam"), video = document.getElementById("video"), layer = document.getElementById("layer");
+const msg = document.getElementById("camMsg"), msgText = document.getElementById("camMsgText");
+const DECL = -7.5;           // 日田あたりの磁北のずれ（磁北は真北より約 7.5° 西）
+const HFOV_PORTRAIT = 48;    // 縦持ちのときの横の写る範囲（目安）。ずれは「ずれを直す」で合わせる
+let stream = null, R = null, adj = JSON.parse(localStorage.getItem("tenbo-adj") || '{"h":0,"p":0}');
+let adjusting = false, gotSensor = false, sensorTimer = null;
+const camTags = P.map(p=>{
+  const pin = document.createElement("div"); pin.className="pin";
+  const t = document.createElement("div"); t.className="tag "+p.k; t.innerHTML = `<b>${p.n}</b><small>${p.d}</small>`;
+  const stem = document.createElement("div"); stem.className="stem";
+  layer.append(stem,pin,t); return {pin,t,stem,w:0,h:0};
+});
+const RANK = {m:0, r:1, p:2, t:3};   // 札の置き場所を決める順（山 → 川 → 場所 → 町）
+function camMessage(text, btn="OK", fn=null){
+  msgText.textContent = text; msg.classList.add("show");
+  const b = document.getElementById("camMsgBtn"); b.textContent = btn;
+  b.onclick = ()=>{ msg.classList.remove("show"); if (fn) fn(); };
+}
+function toPhoto(){ closeCam(); }
+
+async function openCam(){
+  document.getElementById("tabCam").setAttribute("aria-selected","true");
+  document.getElementById("tabPhoto").setAttribute("aria-selected","false");
+  cam.classList.add("show"); cam.setAttribute("aria-hidden","false");
+  // iPhone は方位センサーの許可が要る（ボタンを押した直後に聞く）
+  // 許可されなかったときは、下の「センサーが届かない」案内で知らせる
+  try{
+    if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function")
+      await DeviceOrientationEvent.requestPermission();
+  }catch(e){}
+  if ("ondeviceorientationabsolute" in window) addEventListener("deviceorientationabsolute", onOri);
+  else addEventListener("deviceorientation", onOri);
+  try{
+    stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}, width:{ideal:1920}, height:{ideal:1080}}, audio:false});
+    video.srcObject = stream; await video.play().catch(()=>{});
+  }catch(e){ camMessage("カメラが使えませんでした。ブラウザの設定でカメラを許可するか、「写真で見る」をお使いください。","写真で見る",toPhoto); return; }
+  gotSensor = false;
+  sensorTimer = setTimeout(()=>{ if(!gotSensor) camMessage("方位センサーが使えませんでした。iPhone の場合は、いったん閉じてもう一度「カメラで見る」を押し、「許可」を選んでください。使えないスマホでは「写真で見る」をお使いください。","写真で見る",toPhoto); }, 2500);
+  requestAnimationFrame(draw);
+}
+function closeCam(){
+  cam.classList.remove("show"); cam.setAttribute("aria-hidden","true"); msg.classList.remove("show");
+  document.getElementById("tabCam").setAttribute("aria-selected","false");
+  document.getElementById("tabPhoto").setAttribute("aria-selected","true");
+  removeEventListener("deviceorientationabsolute", onOri); removeEventListener("deviceorientation", onOri);
+  if (stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; }
+  clearTimeout(sensorTimer); R = null;
+}
+document.getElementById("tabCam").onclick = openCam;
+document.getElementById("tabPhoto").onclick = closeCam;
+document.getElementById("closeCam").onclick = closeCam;
+
+/* スマホの向き → 回転行列（東・北・上 の座標） */
+let sm = null;
+function onOri(e){
+  let a = e.alpha;
+  if (typeof e.webkitCompassHeading === "number") a = 360 - e.webkitCompassHeading;   // iPhone
+  else if (!e.absolute && e.type !== "deviceorientationabsolute") { if (a == null) return; }
+  if (a == null || e.beta == null) return;
+  gotSensor = true;
+  a = a - DECL;  // 磁北 → 真北
+  const d = Math.PI/180, ca=Math.cos(a*d), sa=Math.sin(a*d), cb=Math.cos(e.beta*d), sb=Math.sin(e.beta*d), cg=Math.cos(e.gamma*d), sg=Math.sin(e.gamma*d);
+  // R = Rz(α)·Rx(β)·Ry(γ)
+  const m = [
+    ca*cg - sa*sb*sg, -sa*cb, ca*sg + sa*sb*cg,
+    sa*cg + ca*sb*sg,  ca*cb, sa*sg - ca*sb*cg,
+    -cb*sg,            sb,    cb*cg ];
+  // 手ぶれを抑える（なめらかに追う）
+  if (!sm) sm = m.slice(); else for (let i=0;i<9;i++) sm[i] += (m[i]-sm[i])*0.25;
+  R = sm;
+}
+function draw(){
+  if (!cam.classList.contains("show")) return;
+  requestAnimationFrame(draw);
+  if (!R) return;
+  const W = innerWidth, H = innerHeight;
+  const ang = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
+  const th = ang*Math.PI/180, d = Math.PI/180;
+  const shortSide = Math.min(W,H);
+  const f = (shortSide/2)/Math.tan(HFOV_PORTRAIT/2*d);
+  // カメラの向き（画面の奥）＝ 端末の -z
+  const fwdE = -R[2], fwdN = -R[5], fwdU = -R[8];
+  let head = Math.atan2(fwdE, fwdN)/d; head = (head+360)%360;
+  document.getElementById("dir").textContent = `${dirName(head)}  ${Math.round(head)}°`;
+  const vis = [];
+  P.forEach((p,i)=>{
+    const az = (p.az - adj.h)*d, el = (p.el - adj.p)*d;
+    const E = Math.sin(az)*Math.cos(el), N = Math.cos(az)*Math.cos(el), U = Math.sin(el);
+    // 端末の座標へ（R の転置）
+    const x = R[0]*E + R[3]*N + R[6]*U, y = R[1]*E + R[4]*N + R[7]*U, z = R[2]*E + R[5]*N + R[8]*U;
+    const c = camTags[i];
+    const hide = ()=>{ c.pin.style.display = c.t.style.display = c.stem.style.display = "none"; };
+    if (z >= -0.05){ hide(); return; }
+    // 画面の向き（横持ち）に合わせる
+    const xs = x*Math.cos(th) - y*Math.sin(th), ys = x*Math.sin(th) + y*Math.cos(th);
+    const sx = W/2 + f*xs/(-z), sy = H/2 - f*ys/(-z);
+    if (sx < -40 || sx > W+40 || sy < -40 || sy > H+40){ hide(); return; }
+    vis.push({p,c,sx,sy,hide});
+  });
+  // 札が重ならないように、大事なものから順に空いている段へ置く。置けない札は隠す（点は残す）
+  vis.sort((a,b)=> RANK[a.p.k]-RANK[b.p.k] || b.p.el-a.p.el);
+  const placed = [];
+  vis.forEach(v=>{
+    const c = v.c;
+    c.pin.style.display = c.t.style.display = "";
+    if (!c.w){ c.w = c.t.offsetWidth; c.h = c.t.offsetHeight; }
+    const w = c.w, h = c.h, g = 8;
+    // 山は点の上、それ以外は点の下を先に試す
+    const up = [-(h+14), -(2*h+14+g), -(3*h+14+2*g)], dn = [14, h+14+g, 2*(h+g)+14];
+    const tries = v.p.k==="m" ? up.concat(dn) : dn.concat(up);
+    let top = null;
+    const cx = Math.min(Math.max(v.sx, w/2+4), W-w/2-4);   // 札は画面の内側に収める
+    for (const o of tries){
+      const r = {l:cx-w/2, r:cx+w/2, t:v.sy+o, b:v.sy+o+h};
+      if (r.t < 70 || r.b > H-60) continue;
+      if (placed.every(q => r.r < q.l-4 || r.l > q.r+4 || r.b < q.t-4 || r.t > q.b+4)){ placed.push(r); top = r.t; break; }
+    }
+    c.pin.style.left = v.sx+"px"; c.pin.style.top = v.sy+"px";
+    if (top === null){ c.t.style.display = c.stem.style.display = "none"; return; }
+    c.t.style.left = cx+"px"; c.t.style.top = top+"px";
+    const s1 = Math.min(v.sy, top+h), s2 = Math.max(v.sy, top);
+    c.stem.style.display = ""; c.stem.style.left = v.sx+"px"; c.stem.style.top = s1+"px"; c.stem.style.height = (s2-s1)+"px";
+  });
+}
+
+/* ずれを直す：画面を指でなぞって、名前を本物の山に合わせる */
+const adjBtn = document.getElementById("adjust"), bottom = document.getElementById("camBottom");
+const BOTTOM_TEXT = "展望台から西（筑後平野の方）にスマホを向けてください";
+adjBtn.onclick = ()=>{
+  adjusting = !adjusting; adjBtn.classList.toggle("on", adjusting);
+  if (adjusting){
+    bottom.innerHTML = `画面を指でなぞって、名前を本物の山（鷹取山の電波塔など）に合わせてください<div class="row"><button class="cbtn" id="adjReset">元に戻す</button><button class="cbtn y" id="adjDone">できた</button></div>`;
+    document.getElementById("adjReset").onclick = ()=>{ adj = {h:0,p:0}; localStorage.setItem("tenbo-adj", JSON.stringify(adj)); };
+    document.getElementById("adjDone").onclick = ()=>adjBtn.onclick();
+  } else bottom.textContent = BOTTOM_TEXT;
+};
+let drag = null;
+layer.addEventListener("pointerdown", e=>{ if (adjusting) { drag = {x:e.clientX, y:e.clientY, h:adj.h, p:adj.p}; layer.setPointerCapture(e.pointerId); } });
+layer.addEventListener("pointermove", e=>{
+  if (!drag) return;
+  const f = (Math.min(innerWidth,innerHeight)/2)/Math.tan(HFOV_PORTRAIT/2*Math.PI/180);
+  adj.h = drag.h - (e.clientX-drag.x)/f*180/Math.PI;
+  adj.p = drag.p + (e.clientY-drag.y)/f*180/Math.PI;
+});
+layer.addEventListener("pointerup", ()=>{ if (drag){ drag=null; localStorage.setItem("tenbo-adj", JSON.stringify(adj)); } });
+
+/* 電波がなくても動くように、一度開いたら保存しておく */
+if ("serviceWorker" in navigator) addEventListener("load", ()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
