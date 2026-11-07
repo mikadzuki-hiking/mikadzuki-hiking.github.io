@@ -62,6 +62,7 @@
   .list table{ width:100%; border-collapse:collapse; font-size:13.5px; }
   .list td{ padding:6px 4px; border-top:1px solid var(--sky); vertical-align:top; }
   .list td:first-child{ font-weight:900; white-space:nowrap; }
+  .list th{ text-align:left; font-size:12px; font-weight:900; color:#fff; background:var(--navy); padding:2px 10px; }
   .list td.d{ text-align:right; white-space:nowrap; color:var(--navy-soft); font-weight:700; }
   .note{ font-size:12px; color:var(--navy-soft); margin:12px 4px 0; }
 
@@ -92,7 +93,7 @@
 <div class="wrap">
   <a class="back" href="../">← 三日月山ファミリーハイキング</a>
   <h1>展望台からの眺め</h1>
-  <p class="lead">三日月山の展望台とくつろぎ広場から西を見ると、筑後川と筑後平野の向こうに、久留米・鳥栖の町や佐賀の山まで見わたせます。名前を押すと説明が出ます。</p>
+  <p class="lead">三日月山の展望台とくつろぎ広場から西を見ると、筑後川と筑後平野の向こうに、久留米・鳥栖の町や佐賀の山まで見わたせます。名前を押すと説明が出ます。「カメラで見る」では、東の由布岳・くじゅう連山など、ほかの方角の山の名前も出ます。</p>
 
   <div class="places" role="group" aria-label="見る場所">
     <button id="plTenbo" aria-pressed="true">展望台から</button>
@@ -122,9 +123,16 @@
     <table id="tbl"></table>
   </div>
 
+  <div class="list">
+    <h2>ほかの方角に見えるもの（カメラで見るに出ます）</h2>
+    <table id="tbl2"></table>
+    <p class="note" id="moreNote" style="margin-top:6px"></p>
+  </div>
+
   <p class="note">
     ・名前の位置は、国土地理院の標高データと OpenStreetMap の地図データから計算しました。距離は見ている場所からの直線距離です。<br>
-    ・遠くの山（天山・脊振山）は、空気が澄んだ日だけ見えます。<br>
+    ・遠くの山（天山・脊振山・くじゅう連山・祖母山など）は、空気が澄んだ日だけ見えます。<br>
+    ・ほかの方角の名前は地形から計算したもので、木に隠れて見えないところもあります。<br>
     ・「カメラで見る」はスマホの方位センサーを使います。位置情報は使いません。カメラの映像はスマホの中だけで使い、どこにも送りません。
   </p>
 </div>
@@ -152,6 +160,12 @@ const INFO = {
   "原鶴温泉":"筑後川沿いの温泉地。川沿いの高い建物は温泉旅館です。",
   "脊振山・九千部山":"福岡県と佐賀県の境に連なる脊振山地の山。",
   "筑後川":"阿蘇の山から有明海へ流れる、九州でいちばん大きな川です。",
+  "英彦山":"修験道の山として知られる、福岡県と大分県の境の山。",
+  "由布岳":"湯布院の町の上にそびえる、二つの頂をもつ山。",
+  "くじゅう連山":"中岳は九州本土でいちばん高い山（1,791m）。",
+  "祖母山":"大分県と宮崎県の境の山。遠くて、空気が澄んだ日だけ見えます。",
+  "豆田町":"江戸時代の町並みが残る、日田の古い町。",
+  "夜明ダム":"三日月山のふもと、筑後川のダム。",
 };
 const PLACES = {
   tenbo: { name:"展望台", img:"view-west.jpg", alt:"三日月山の展望台から西を見た景色。左に鷹取山、中央に筑後平野と筑後川",
@@ -171,7 +185,34 @@ const PLACES = {
     {n:"筑後川", s:"九州でいちばん大きな川", d:"3.6km", k:"r", az:284.74, el:-7.11, px:79.17, py:85.5, ty:93.3},
     {n:"杷木の山", s:"朝倉市", d:"7km", k:"m", az:286.35, el:-2.63, px:82.5, py:74.5, ty:62},
     {n:"杷木", s:"朝倉市", d:"6.5km", k:"t", az:289.75, el:-3.48, px:89.28, py:76.8, ty:86},
-  ]},
+  ],
+    more:[
+    {n:"英彦山", s:"1,199m・福岡県と大分県の境", d:"15.8km", k:"m", az:23.09, el:2.61},
+    {n:"犬ヶ岳", s:"1,131m・福岡県と大分県の境", d:"22.8km", k:"m", az:35.55, el:1.59},
+    {n:"一尺八寸山", s:"707m・日田市", d:"16.9km", k:"m", az:84.77, el:0.76},
+    {n:"鶴見岳", s:"1,374m・別府市", d:"53km", k:"m", az:97.1, el:0.77},
+    {n:"由布岳", s:"1,583m・由布市", d:"50km", k:"m", az:98.17, el:1.09},
+    {n:"月出山岳", s:"678m・日田市", d:"18.2km", k:"m", az:101.0, el:0.6},
+    {n:"豆田町", s:"日田市・天領日田の町並み", d:"7.5km", k:"p", az:105.45, el:-2.86},
+    {n:"日田市", s:"大分県・市役所のあたり", d:"8.1km", k:"t", az:109.93, el:-2.62},
+    {n:"日田駅", s:"JR久大本線", d:"8km", k:"p", az:113.57, el:-2.66},
+    {n:"万年山", s:"1,140m・玖珠町", d:"28km", k:"m", az:116.85, el:1.26},
+    {n:"くじゅう連山", s:"中岳 1,791m・大船山 1,786m など", d:"46〜48km", k:"m", az:127.0, el:1.45},
+    {n:"涌蓋山", s:"1,500m・大分県と熊本県の境", d:"36km", k:"m", az:128.96, el:1.48},
+    {n:"夜明", s:"日田市・ふもとの地区", d:"1.3km", k:"t", az:136.83, el:-11.33},
+    {n:"祖母山", s:"1,756m・大分県と宮崎県の境", d:"73km", k:"m", az:141.81, el:0.72},
+    {n:"御前岳", s:"1,209m・福岡県と大分県の境", d:"17.2km", k:"m", az:176.35, el:2.41},
+    {n:"うきは市 浮羽町小塩", s:"福岡県", d:"4.8km", k:"t", az:192.61, el:-2.08},
+    {n:"夜明ダム", s:"筑後川", d:"1.6km", k:"p", az:238.82, el:-14.61},
+    {n:"朝倉市", s:"福岡県・甘木のあたり", d:"20km", k:"t", az:295.58, el:-1.24},
+    {n:"筑紫野市", s:"福岡県", d:"35km", k:"t", az:296.93, el:-0.82},
+    {n:"宝満山", s:"830m・太宰府市", d:"35km", k:"m", az:308.64, el:0.47},
+    {n:"三郡山", s:"936m・福岡県", d:"35km", k:"m", az:312.31, el:0.65},
+    {n:"古処山", s:"860m・朝倉市", d:"19.8km", k:"m", az:320.92, el:1.07},
+    {n:"屏山", s:"927m・福岡県", d:"19.3km", k:"m", az:325.01, el:1.3},
+    {n:"馬見山", s:"978m・福岡県", d:"17.8km", k:"m", az:331.43, el:1.58},
+    ], blocked:[]},
+
   hiroba: { name:"くつろぎ広場", img:"view-hiroba.jpg", alt:"三日月山のくつろぎ広場から西を見た景色。中央に筑後平野と筑後川、遠くに佐賀の山",
     az0:267.863, fx:2000/5652, scroll:0.3, items:[
     {n:"鷹取山", s:"802m・耳納連山", d:"13.6km", k:"m", az:248.53, el:1.75, px:0.4, py:56.6, ty:46, shift:46},
@@ -187,10 +228,24 @@ const PLACES = {
     {n:"小郡市", s:"福岡県", d:"29km", k:"t", az:280.87, el:-0.81, px:82.6, py:65.53, ty:52, shift:-24},
     {n:"脊振山・九千部山", s:"1,055m・848m", d:"39〜47km", k:"m", az:281.3, el:0.54, px:83.72, py:61.07, ty:38, shift:-30},
     {n:"杷木の山", s:"朝倉市", d:"6.9km", k:"m", az:284.87, el:-1.97, px:93.15, py:69.47, ty:58, shift:-40},
-  ]},
+  ],
+    more:[
+    {n:"一尺八寸山", s:"707m・日田市", d:"17km", k:"m", az:85.47, el:1.06},
+    {n:"鶴見岳", s:"1,374m・別府市", d:"54km", k:"m", az:97.31, el:0.86},
+    {n:"由布岳", s:"1,583m・由布市", d:"50km", k:"m", az:98.39, el:1.19},
+    {n:"月出山岳", s:"678m・日田市", d:"18.3km", k:"m", az:101.58, el:0.88},
+    {n:"万年山", s:"1,140m・玖珠町", d:"28km", k:"m", az:117.16, el:1.43},
+    {n:"くじゅう連山", s:"中岳 1,791m・大船山 1,786m など", d:"47〜48km", k:"m", az:127.2, el:1.52},
+    {n:"朝倉市", s:"福岡県・甘木のあたり", d:"20km", k:"t", az:295.13, el:-0.99},
+    {n:"筑紫野市", s:"福岡県", d:"35km", k:"t", az:296.67, el:-0.68},
+    ],
+    // 三日月山の山頂側に隠れて、遠くが見えない方角（北・南）
+    blocked:[[300,50],[130,205]]},
+
 };
 let place = location.hash === "#hiroba" ? "hiroba" : "tenbo";
 let P = PLACES[place].items;
+let C = P.concat(PLACES[place].more);   // カメラで見るときの名前（360°）
 const KIND = {m:"山", t:"町", p:"場所", r:"川"};
 const DIR16 = ["北","北北東","北東","東北東","東","東南東","南東","南南東","南","南南西","南西","西南西","西","西北西","北西","北北西"];
 const dirName = a => DIR16[Math.round(((a%360)+360)%360/22.5)%16];
@@ -203,7 +258,9 @@ function show(i){
   tags.forEach((t,j)=>t.classList.toggle("on", j===i));
   info.innerHTML = `<h2>${p.n}</h2><div class="meta">${p.s ? p.s+"　" : ""}${PLACES[place].name}から ${p.d}・${dirName(p.az)}の方角</div>` + (INFO[p.n] ? `<p>${INFO[p.n]}</p>` : "");
 }
-const bottomText = ()=>`${PLACES[place].name}から西にスマホを向けてください`;
+const bottomText = ()=>`${PLACES[place].name}から、見たい方角にスマホを向けてください`;
+// 向いている方角が山に隠れているか
+const isBlocked = h => PLACES[place].blocked.some(([a,b]) => a<b ? (h>=a && h<b) : (h>=a || h<b));
 function buildPhoto(){
   const pl = PLACES[place];
   panoIn.querySelectorAll(".stem,.pin,.tag").forEach(e=>e.remove());
@@ -230,18 +287,27 @@ function buildPhoto(){
     const s = document.createElement("span"); s.textContent = l; s.style.left = x+"%"; if (l==="西") s.className="main";
     ruler.append(s);
   });
-  document.getElementById("tbl").innerHTML = P.map(p=>`<tr><td>${p.n}</td><td>${KIND[p.k]}${p.s ? "・"+p.s : ""}</td><td class="d">${p.d}</td></tr>`).join("");
+  const row = p=>`<tr><td>${p.n}</td><td>${KIND[p.k]}${p.s ? "・"+p.s : ""}</td><td class="d">${p.d}</td></tr>`;
+  document.getElementById("tbl").innerHTML = P.map(row).join("");
+  // ほかの方角は北から時計回りに、方角ごとに区切る
+  let last = "";
+  document.getElementById("tbl2").innerHTML = pl.more.slice().sort((a,b)=>a.az-b.az).map(p=>{
+    const g = dirName(p.az), h = g!==last ? `<tr><th colspan="3">${g}</th></tr>` : ""; last = g; return h + row(p);
+  }).join("");
   info.innerHTML = `<h2>名前を押してください</h2><p>山・町・川の名前と、${pl.name}からの距離が出ます。</p>`;
   document.getElementById("plTenbo").setAttribute("aria-pressed", place==="tenbo");
   document.getElementById("plHiroba").setAttribute("aria-pressed", place==="hiroba");
   document.getElementById("camBottom").textContent = bottomText();
+  document.getElementById("moreNote").textContent = place==="hiroba"
+    ? "くつろぎ広場からは、北と南は三日月山の山頂側に隠れるため、東と西だけです。"
+    : "地形から計算しています。木に隠れて見えない方角もあります。";
   // スマホでは町の中心あたりが見える位置から
   const pn = document.getElementById("pano");
   const sc = ()=>{ pn.scrollLeft = (pn.scrollWidth-pn.clientWidth)*pl.scroll; };
   if (img.complete) sc(); else img.onload = sc;
 }
 function setPlace(k){
-  place = k; P = PLACES[k].items;
+  place = k; P = PLACES[k].items; C = P.concat(PLACES[k].more);
   history.replaceState(null, "", k==="hiroba" ? "#hiroba" : location.pathname);
   buildPhoto(); buildCamTags();
 }
@@ -258,10 +324,11 @@ let adjusting = false, gotSensor = false, sensorTimer = null;
 let camTags = [];
 function buildCamTags(){
   layer.innerHTML = "";
-  camTags = P.map(p=>{
+  camTags = C.map(p=>{
     const pin = document.createElement("div"); pin.className="pin";
     const t = document.createElement("div"); t.className="tag "+p.k; t.innerHTML = `<b>${p.n}</b><small>${p.d}</small>`;
     const stem = document.createElement("div"); stem.className="stem";
+    pin.style.display = t.style.display = stem.style.display = "none";   // 向きが分かるまでは出さない
     layer.append(stem,pin,t); return {pin,t,stem,w:0,h:0};
   });
 }
@@ -337,8 +404,12 @@ function draw(){
   const fwdE = -R[2], fwdN = -R[5], fwdU = -R[8];
   let head = Math.atan2(fwdE, fwdN)/d; head = (head+360)%360;
   document.getElementById("dir").textContent = `${dirName(head)}  ${Math.round(head)}°`;
+  if (!adjusting){
+    const t = isBlocked(head) ? "この方角は三日月山の山頂側に隠れて、遠くは見えません" : bottomText();
+    if (bottom.textContent !== t) bottom.textContent = t;
+  }
   const vis = [];
-  P.forEach((p,i)=>{
+  C.forEach((p,i)=>{
     const az = (p.az - adj.h)*d, el = (p.el - adj.p)*d;
     const E = Math.sin(az)*Math.cos(el), N = Math.cos(az)*Math.cos(el), U = Math.sin(el);
     // 端末の座標へ（R の転置）
