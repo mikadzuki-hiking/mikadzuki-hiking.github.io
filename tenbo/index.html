@@ -47,6 +47,8 @@
   .tag b{ display:block; font-size:14px; font-weight:900; }
   .tag small{ display:block; font-size:10.5px; color:var(--navy-soft); font-weight:700; }
   .tag.m{ border-color:#2f6a2c; } .tag.r{ border-color:#2c6fb0; }
+  .tag.b{ border-width:1.5px; border-color:#7a8796; padding:1px 8px 2px; }
+  .tag.b b{ font-size:12px; } .tag.b small{ font-size:9.5px; }
   .tag.on{ background:var(--yellow); }
   .hint{ font-size:12px; color:var(--navy-soft); margin:8px 4px 0; }
 
@@ -86,7 +88,7 @@
   .cam-msg{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(88%,420px); background:#fff; color:var(--navy); border-radius:var(--r); padding:20px; text-align:center; display:none; }
   .cam-msg.show{ display:block; }
   .cam-msg p{ margin:0 0 14px; font-size:14px; }
-  #adjust.on{ background:var(--yellow); }
+  #adjust.on, #bldBtn.on{ background:var(--yellow); }
 </style>
 </head>
 <body>
@@ -124,7 +126,7 @@
   </div>
 
   <div class="list">
-    <h2>ほかの方角に見えるもの（カメラで見るに出ます）</h2>
+    <h2>カメラで見ると出る名前（写真にないもの）</h2>
     <table id="tbl2"></table>
     <p class="note" id="moreNote" style="margin-top:6px"></p>
   </div>
@@ -143,6 +145,7 @@
   <div id="layer"></div>
   <div class="cam-top">
     <span class="dir" id="dir">―</span>
+    <button class="cbtn" id="bldBtn" aria-pressed="false">建物</button>
     <button class="cbtn" id="adjust">ずれを直す</button>
     <button class="cbtn" id="closeCam">閉じる</button>
   </div>
@@ -172,7 +175,8 @@ const PLACES = {
     az0:268.42, fx:2000/4073.6, scroll:0.35, items:[
     {n:"鷹取山", s:"802m・耳納連山", d:"13.6km", k:"m", az:249.4, el:1.37, px:14.65, py:62.6, ty:42.7},
     {n:"道の駅うきは", s:"うきは市浮羽町", d:"4km", k:"p", az:251.16, el:-5.4, px:17.8, py:79.2, ty:86},
-    {n:"うきは市 浮羽町", s:"福岡県", d:"6.5km", k:"t", az:256.35, el:-3.64, px:27.75, py:75.17, ty:78.7},
+    {n:"(株)SASAKI", s:"うきは市浮羽町山北", d:"3.1km", k:"p", az:253.0, el:-6.99, px:21.28, py:83.29, ty:93},
+    {n:"うきは市 浮羽町", s:"福岡県", d:"6.5km", k:"t", az:256.35, el:-3.64, px:27.75, py:75.17, ty:78.7, shift:50},
     {n:"高良山", s:"312m・久留米市", d:"27km", k:"m", az:258.6, el:-0.43, px:32.05, py:67.5, ty:50.7},
     {n:"久留米市", s:"福岡県", d:"33km", k:"t", az:264.88, el:-0.9, px:43.35, py:69.0, ty:42.7},
     {n:"天山", s:"1,046m・佐賀県", d:"67km", k:"m", az:269.3, el:0.23, px:51.25, py:66.53, ty:34.7},
@@ -211,6 +215,25 @@ const PLACES = {
     {n:"古処山", s:"860m・朝倉市", d:"19.8km", k:"m", az:320.92, el:1.07},
     {n:"屏山", s:"927m・福岡県", d:"19.3km", k:"m", az:325.01, el:1.3},
     {n:"馬見山", s:"978m・福岡県", d:"17.8km", k:"m", az:331.43, el:1.58},
+    // 建物（k:"b"）：カメラで「建物」を押したときだけ、画面の真ん中あたりに出す
+    {n:"昭和学園高校", s:"日田市", d:"7.7km", k:"b", az:101.15, el:-2.76},
+    {n:"永山城跡", s:"日田市・月隈公園", d:"7.3km", k:"b", az:101.79, el:-2.74},
+    {n:"日田高校", s:"日田市", d:"8.3km", k:"b", az:108.24, el:-2.51},
+    {n:"日田三隈高校", s:"日田市", d:"5.5km", k:"b", az:108.41, el:-3.43},
+    {n:"光岡小学校", s:"日田市", d:"6.2km", k:"b", az:108.55, el:-3.43},
+    {n:"日田市役所", s:"日田市", d:"8.1km", k:"b", az:109.93, el:-2.62},
+    {n:"咸宜園", s:"日田市・広瀬淡窓の私塾の跡", d:"7.5km", k:"b", az:110.07, el:-2.86},
+    {n:"藤蔭高校", s:"日田市", d:"8km", k:"b", az:111.25, el:-2.66},
+    {n:"藤波ダム", s:"うきは市浮羽町", d:"7.2km", k:"b", az:243.19, el:-2.81},
+    {n:"山春小学校", s:"うきは市浮羽町", d:"3.1km", k:"b", az:251.43, el:-6.85},
+    {n:"浮羽中学校", s:"うきは市浮羽町", d:"5.4km", k:"b", az:258.58, el:-4.31},
+    {n:"うきは駅", s:"JR久大本線", d:"6.7km", k:"b", az:259.5, el:-3.58},
+    {n:"筑後吉井駅", s:"JR久大本線", d:"10km", k:"b", az:266.87, el:-2.47},
+    {n:"筑後大石駅", s:"JR久大本線", d:"4.1km", k:"b", az:272.26, el:-5.8},
+    {n:"大石小学校", s:"うきは市浮羽町", d:"4.8km", k:"b", az:282.61, el:-5.05},
+    {n:"朝羽高校", s:"朝倉市杷木", d:"5.4km", k:"b", az:288.98, el:-4.43},
+    {n:"杷木小学校", s:"朝倉市杷木", d:"4.1km", k:"b", az:293.39, el:-5.61},
+    {n:"杷木中学校", s:"朝倉市杷木", d:"5.1km", k:"b", az:295.17, el:-4.62},
     ], blocked:[]},
 
   hiroba: { name:"くつろぎ広場", img:"view-hiroba.jpg", alt:"三日月山のくつろぎ広場から西を見た景色。中央に筑後平野と筑後川、遠くに佐賀の山",
@@ -230,6 +253,7 @@ const PLACES = {
     {n:"杷木の山", s:"朝倉市", d:"6.9km", k:"m", az:284.87, el:-1.97, px:93.15, py:69.47, ty:58, shift:-40},
   ],
     more:[
+    {n:"(株)SASAKI", s:"うきは市浮羽町山北", d:"3.1km", k:"p", az:249.16, el:-5.34},
     {n:"一尺八寸山", s:"707m・日田市", d:"17km", k:"m", az:85.47, el:1.06},
     {n:"鶴見岳", s:"1,374m・別府市", d:"54km", k:"m", az:97.31, el:0.86},
     {n:"由布岳", s:"1,583m・由布市", d:"50km", k:"m", az:98.39, el:1.19},
@@ -238,6 +262,16 @@ const PLACES = {
     {n:"くじゅう連山", s:"中岳 1,791m・大船山 1,786m など", d:"47〜48km", k:"m", az:127.2, el:1.52},
     {n:"朝倉市", s:"福岡県・甘木のあたり", d:"20km", k:"t", az:295.13, el:-0.99},
     {n:"筑紫野市", s:"福岡県", d:"35km", k:"t", az:296.67, el:-0.68},
+    // 建物（k:"b"）
+    {n:"藤蔭高校", s:"日田市", d:"8.1km", k:"b", az:112.43, el:-1.99},
+    {n:"藤波ダム", s:"うきは市浮羽町", d:"7.3km", k:"b", az:241.57, el:-2.09},
+    {n:"山春小学校", s:"うきは市浮羽町", d:"3.1km", k:"b", az:247.61, el:-5.2},
+    {n:"浮羽中学校", s:"うきは市浮羽町", d:"5.4km", k:"b", az:256.37, el:-3.37},
+    {n:"うきは駅", s:"JR久大本線", d:"6.6km", k:"b", az:257.7, el:-2.82},
+    {n:"筑後吉井駅", s:"JR久大本線", d:"10km", k:"b", az:265.69, el:-1.96},
+    {n:"筑後大石駅", s:"JR久大本線", d:"4km", k:"b", az:269.4, el:-4.61},
+    {n:"大石小学校", s:"うきは市浮羽町", d:"4.7km", k:"b", az:280.36, el:-4.06},
+    {n:"朝羽高校", s:"朝倉市杷木", d:"5.3km", k:"b", az:287.1, el:-3.56},
     ],
     // 三日月山の山頂側に隠れて、遠くが見えない方角（北・南）
     blocked:[[300,50],[130,205]]},
@@ -246,7 +280,7 @@ const PLACES = {
 let place = location.hash === "#hiroba" ? "hiroba" : "tenbo";
 let P = PLACES[place].items;
 let C = P.concat(PLACES[place].more);   // カメラで見るときの名前（360°）
-const KIND = {m:"山", t:"町", p:"場所", r:"川"};
+const KIND = {m:"山", t:"町", p:"場所", r:"川", b:"建物"};
 const DIR16 = ["北","北北東","北東","東北東","東","東南東","南東","南南東","南","南南西","南西","西南西","西","西北西","北西","北北西"];
 const dirName = a => DIR16[Math.round(((a%360)+360)%360/22.5)%16];
 
@@ -299,8 +333,8 @@ function buildPhoto(){
   document.getElementById("plHiroba").setAttribute("aria-pressed", place==="hiroba");
   document.getElementById("camBottom").textContent = bottomText();
   document.getElementById("moreNote").textContent = place==="hiroba"
-    ? "くつろぎ広場からは、北と南は三日月山の山頂側に隠れるため、東と西だけです。"
-    : "地形から計算しています。木に隠れて見えない方角もあります。";
+    ? "くつろぎ広場からは、北と南は三日月山の山頂側に隠れるため、東と西だけです。建物は、カメラの画面で「建物」を押すと、画面の真ん中あたりに出ます。"
+    : "地形から計算しています。木に隠れて見えない方角もあります。建物は、カメラの画面で「建物」を押すと、画面の真ん中あたりに出ます。";
   // スマホでは町の中心あたりが見える位置から
   const pn = document.getElementById("pano");
   const sc = ()=>{ pn.scrollLeft = (pn.scrollWidth-pn.clientWidth)*pl.scroll; };
@@ -322,6 +356,7 @@ const HFOV_PORTRAIT = 48;    // 縦持ちのときの横の写る範囲（目安
 let stream = null, R = null, adj = JSON.parse(localStorage.getItem("tenbo-adj") || '{"h":0,"p":0}');
 let adjusting = false, gotSensor = false, sensorTimer = null;
 let camTags = [];
+let showBld = localStorage.getItem("tenbo-bld") === "1";   // 建物の名前を出すか（スマホに覚えておく）
 function buildCamTags(){
   layer.innerHTML = "";
   camTags = C.map(p=>{
@@ -332,7 +367,7 @@ function buildCamTags(){
     layer.append(stem,pin,t); return {pin,t,stem,w:0,h:0};
   });
 }
-const RANK = {m:0, r:1, p:2, t:3};   // 札の置き場所を決める順（山 → 川 → 場所 → 町）
+const RANK = {m:0, r:1, p:2, t:3, b:4};   // 札の置き場所を決める順（山 → 川 → 場所 → 町 → 建物）
 function camMessage(text, btn="OK", fn=null){
   msgText.textContent = text; msg.classList.add("show");
   const b = document.getElementById("camMsgBtn"); b.textContent = btn;
@@ -421,10 +456,13 @@ function draw(){
     const xs = x*Math.cos(th) - y*Math.sin(th), ys = x*Math.sin(th) + y*Math.cos(th);
     const sx = W/2 + f*xs/(-z), sy = H/2 - f*ys/(-z);
     if (sx < -40 || sx > W+40 || sy < -40 || sy > H+40){ hide(); return; }
+    if (p.k === "b" && (!showBld || Math.abs(sx - W/2) > W*0.22)){ hide(); return; }
     vis.push({p,c,sx,sy,hide});
   });
   // 札が重ならないように、大事なものから順に空いている段へ置く。置けない札は隠す（点は残す）
-  vis.sort((a,b)=> RANK[a.p.k]-RANK[b.p.k] || b.p.el-a.p.el);
+  // 「建物」を押したときは、真ん中の建物を山の次に置く（真ん中に近いものから）
+  const rk = v => v.p.k==="b" ? 0.5 : RANK[v.p.k];
+  vis.sort((a,b)=> rk(a)-rk(b) || (a.p.k==="b" ? Math.abs(a.sx-W/2)-Math.abs(b.sx-W/2) : b.p.el-a.p.el));
   const placed = [];
   vis.forEach(v=>{
     const c = v.c;
@@ -448,6 +486,12 @@ function draw(){
     c.stem.style.display = ""; c.stem.style.left = v.sx+"px"; c.stem.style.top = s1+"px"; c.stem.style.height = (s2-s1)+"px";
   });
 }
+
+/* 建物：押すと、画面の真ん中あたりの建物の名前も出す */
+const bldBtn = document.getElementById("bldBtn");
+const setBld = v=>{ showBld = v; bldBtn.classList.toggle("on", v); bldBtn.setAttribute("aria-pressed", v); localStorage.setItem("tenbo-bld", v ? "1" : "0"); };
+bldBtn.onclick = ()=>setBld(!showBld);
+setBld(showBld);
 
 /* ずれを直す：画面を指でなぞって、名前を本物の山に合わせる */
 const adjBtn = document.getElementById("adjust"), bottom = document.getElementById("camBottom");
