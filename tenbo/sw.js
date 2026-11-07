@@ -1,6 +1,6 @@
 // 展望台ページを電波のない山の上でも開けるように、ページと写真を保存しておく
-const CACHE = "tenbo-v1";
-const FILES = ["./", "./index.html", "./view-west.jpg", "../img/logo.png"];
+const CACHE = "tenbo-v2";
+const FILES = ["./", "./index.html", "./view-west.jpg", "./view-hiroba.jpg", "../img/logo.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
